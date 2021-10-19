@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, Ref } from 'vue';
 
 export default defineComponent({
   name: 'PageIndex',
@@ -40,7 +40,7 @@ export default defineComponent({
         content: 'ct5'
       }
     ]);
-    const meta = ref<Meta>({
+    const meta: Ref<meta> = ref<Meta>({
       totalCount: 1200
     });
     return { todos, meta };
