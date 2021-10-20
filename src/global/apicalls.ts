@@ -6,10 +6,12 @@ const instance = axios.create({
   timeout: 10000,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
 const requests = {
   get: (url: string) => instance.get(url).then(responseBody),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post: (url: string, data: any) => instance.post(url, data).then(responseBody),
   delete: (url: string) => instance.delete(url).then(responseBody),
 };

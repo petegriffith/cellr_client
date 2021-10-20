@@ -8,6 +8,7 @@ const currentWine: Wine = {
   varietal: '',
   vintage: 0,
   color: '',
+  created_at: '',
 }
 
 const wineState: WineStoreContents = reactive({

@@ -2,14 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> cellr. </q-toolbar-title>
       </q-toolbar>
@@ -19,15 +12,11 @@
       <q-list>
         <q-item-label header> Wine Drawer </q-item-label>
 
-        <DrawerLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+        <DrawerLink v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
-
-    <q-page-container>
+    <q-page-container v-if="isLoading"> OI! </q-page-container>
+    <q-page-container v-else>
       <router-view />
     </q-page-container>
   </q-layout>
@@ -36,7 +25,22 @@
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
 import { ref } from 'vue';
+import { setAllWines } from '../global/store/setters';
+const isLoading = ref(true);
 const leftDrawerOpen = ref(false);
+
+const setStores = async () => {
+  await setAllWines();
+};
+
+setStores().then(
+  () => {
+    isLoading.value = false;
+  },
+  (error) => {
+    return error;
+  }
+);
 
 const linksList = [
   {
@@ -56,5 +60,4 @@ const linksList = [
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
-
 </script>

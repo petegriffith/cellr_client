@@ -4,6 +4,10 @@ export interface Wine {
     varietal?: string
     vintage?:number
     color: string
+    created_at: string | Date
+}
+export interface WineTableRows extends Omit<Wine, 'id' | 'created_at'> {
+    created_at: Date
 }
 export interface WineEncounter {
     id: number
