@@ -1,7 +1,9 @@
 import { reactive } from 'vue';
 import { Wine, WineStoreContents } from '../../typescript/wineTypes';
 
+// maybe not necessary?
 const allWinesList: Wine[] = [];
+
 const currentWine: Wine = {
   id: 0,
   name: '',

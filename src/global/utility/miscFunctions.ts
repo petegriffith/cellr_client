@@ -1,4 +1,3 @@
-export const convertKnexDate = (knexDate: string | Date): Date | string => {
-    const convertedDate = new Date(knexDate)
-    return convertedDate
-}
+export const convertSQLTimestamp = (SQLTimestamp: string): string => {
+  return new Date(SQLTimestamp).toDateString();
+};

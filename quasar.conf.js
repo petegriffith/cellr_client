@@ -88,6 +88,7 @@ module.exports = configure(function (ctx) {
       proxy: {
         '/': {
           target: 'http://cellr-server.herokuapp.com/',
+          // target: 'http://localhost:3000',
           changeOrigin: true,
           pathRewrite: {
             '^/': ''
