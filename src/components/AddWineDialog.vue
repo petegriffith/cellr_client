@@ -60,6 +60,7 @@ export default defineComponent({
       if (props.newWine)
         try {
             console.log(props.newWine)
+            // this fails if vintage isn't set. Need to find a solution!
           await wines.postWine(props.newWine);
           await setAllWines();
           context.emit('posted')
