@@ -15,7 +15,7 @@
         <DrawerLink v-for="link in linksList" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
-    <q-page-container v-if="isLoading"> OI! </q-page-container>
+    <q-page-container v-if="isLoading"> App Loading... </q-page-container>
     <q-page-container v-else>
       <router-view />
     </q-page-container>
@@ -26,10 +26,10 @@
 import DrawerLink from 'components/DrawerLink.vue';
 import { ref } from 'vue';
 import { setAllWines } from '../global/store/setters';
-const isLoading = ref(true);
+const isLoading = ref(false);
 const leftDrawerOpen = ref(false);
 
-const setStores = async () => {
+/* const setStores = async () => {
   await setAllWines();
 };
 
@@ -40,14 +40,14 @@ setStores().then(
   (error) => {
     return error;
   }
-);
+); */
 
 const linksList = [
   {
     title: 'AllWines?',
-    caption: 'All Wines in your cellr',
+    caption: 'All of the wines in your cellr',
     icon: 'wine_bar',
-    link: '#',
+    link: '/WineList',
   },
   {
     title: 'Recent Encounters',
@@ -55,6 +55,13 @@ const linksList = [
     icon: 'list_alt',
     link: '#',
   },
+  {
+    title: 'Add a Wine',
+    caption: 'Add a new wine to your cellr',
+    icon: 'wine_bar',
+    link: '/AddWine',
+  },
+  
 ];
 
 const toggleLeftDrawer = () => {

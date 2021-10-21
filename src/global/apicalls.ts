@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Wine, WineEncounter } from '../typescript/wineTypes';
+import { Wine, WineEncounter, NewWine } from '../typescript/wineTypes';
 import { UserData } from '../typescript/authTypes';
 
 const instance = axios.create({
@@ -22,7 +22,7 @@ export const users = {
 
 export const wines = {
   getWines: (): Promise<Wine[]> => requests.get('./wines/allWines'),
-  postWine: (wine: Wine): Promise<void> => requests.post('./wines/post', wine),
+  postWine: (wine: NewWine): Promise<void> => requests.post('./wines/post', wine),
   deleteWine: (wine_id: number): Promise<void> =>
     requests.delete(`/wines/delete/${wine_id}`),
 };

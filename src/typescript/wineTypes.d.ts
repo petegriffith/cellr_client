@@ -6,6 +6,9 @@ export interface Wine {
     color: string
     created_at: string
 }
+
+export type NewWine = Partial<Wine>
+
 export interface WineEncounter {
     id: number
     wine_id?: number
