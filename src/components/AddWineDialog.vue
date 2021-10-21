@@ -48,6 +48,7 @@ import { defineComponent } from 'vue';
 import { AccessWineStore } from 'src/global/store/wineStore';
 import { wines } from 'src/global/apicalls';
 import { setAllWines } from 'src/global/store/setters';
+import { NewWine } from 'src/typescript/wineTypes';
 
 export default defineComponent({
   props: {
@@ -59,11 +60,9 @@ export default defineComponent({
     const addWine = async () => {
       if (props.newWine)
         try {
-            console.log(props.newWine)
-            // this fails if vintage isn't set. Need to find a solution!
-          await wines.postWine(props.newWine);
+          await wines.postWine(props.newWine as NewWine);
           await setAllWines();
-          context.emit('posted')
+          context.emit('posted');
         } catch (err) {
           alert(err);
         }
