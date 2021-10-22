@@ -4,6 +4,8 @@ import { Wine, WineStoreContents } from '../../typescript/wineTypes';
 // maybe not necessary?
 const allWinesList: Wine[] = [];
 
+const currentWineId: number | null = null
+
 const currentWine: Wine = {
   id: 0,
   name: '',
@@ -16,6 +18,7 @@ const currentWine: Wine = {
 const wineState: WineStoreContents = reactive({
   allWinesList: allWinesList,
   currentWine: currentWine,
+  currentWineId: currentWineId
 });
 
 export function AccessWineStore(): WineStoreContents {
