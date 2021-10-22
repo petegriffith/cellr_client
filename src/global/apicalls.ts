@@ -23,18 +23,13 @@ export const users = {
 export const wines = {
   getWines: (): Promise<Wine[]> => requests.get('./wines/allWines'),
   postWine: (wine: NewWine): Promise<void> => requests.post('./wines/post', wine),
-  deleteWine: (wine_id: number): Promise<void> =>
-    requests.delete(`/wines/delete/${wine_id}`),
+  deleteWine: (wine_id: number): Promise<void> => requests.delete(`/wines/delete/${wine_id}`),
 };
 
 export const encounters = {
-  getEncountersByWine: (wine_id: number): Promise<WineEncounter[]> =>
-    requests.get(`./encounters/${wine_id}`),
-  postEncounter: (
-    newEncounter: WineEncounter,
-    wine_id: number
-  ): Promise<WineEncounter> =>
+  getEncountersByWineId: (wine_id: number): Promise<WineEncounter[]> => requests.get(`./encounters/byID/${wine_id}`),
+  getEncountersByWineName: (wine_name: string): Promise<WineEncounter[]> => requests.get(`./encounters/byName/${wine_name}`),
+  postEncounter: (newEncounter: WineEncounter, wine_id: number): Promise<WineEncounter> =>
     requests.post(`./encounters/post/${wine_id}`, newEncounter),
-  deleteEncounter: (encounter_id: number): Promise<void> =>
-    requests.delete(`/encounters/delete/${encounter_id}`),
+  deleteEncounter: (encounter_id: number): Promise<void> => requests.delete(`/encounters/delete/${encounter_id}`),
 };

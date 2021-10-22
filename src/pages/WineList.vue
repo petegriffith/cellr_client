@@ -36,7 +36,7 @@
               <q-btn
                 dense
                 color="primary"
-                @click="wineState.currentWineId = props.row.id;"
+                @click="wineState.currentWineId = props.row.name;"
                 to="/WineEncounters"
                 label="see encounters"
               ></q-btn>

@@ -22,7 +22,7 @@ export interface WineEncounter {
   purchase_location?: string;
   rating?: number;
   notes: string;
-  encounter_date: Date;
+  encounter_date: string;
 }
 
 export interface WineStoreContents {
