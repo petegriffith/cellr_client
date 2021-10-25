@@ -35,8 +35,7 @@ const columns = [
 const fetchEncounters = async () => {
   // this is where a loading animation should go
   try {
-      // this is a dev function because of the name/id quandary
-      const encountersList = await encounters.getEncountersByWineName(wineState.currentWineId as string);
+      const encountersList: WineEncounter[] = await encounters.getEncountersByWineId(wineState.currentWineId as number);
       console.log(encountersList)
       rows.value = encountersList.map((row) => {
         row.encounter_date = convertSQLTimestamp(row.encounter_date);

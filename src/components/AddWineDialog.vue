@@ -60,7 +60,8 @@ export default defineComponent({
     const addWine = async () => {
       if (props.newWine)
         try {
-          await wines.postWine(props.newWine as NewWine);
+          console.log(props.newWine)
+          console.log(await wines.postWine(props.newWine as NewWine));
           await setAllWines();
           context.emit('posted');
         } catch (err) {

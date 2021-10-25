@@ -2,7 +2,7 @@
   <q-dialog>
     <q-card style="width: 600px; max-width: 60vw">
       <q-card-section>
-        <div class="text-h6">Are you sure you want to delete {{ wineState.currentWine.name }}?</div>
+        <div class="text-h6">Are you sure you want to delete {{ wineState.currentWineId }}?</div>
         <p>All encounters accociated with {{ wineState.currentWine.name }} will also be deleted.</p>
         <p>This is a PERMANENT change</p>
       </q-card-section>
@@ -17,7 +17,11 @@
             color="primary"
             dense
             v-close-popup
-            @click="() => {deleteWine()}"
+            @click="
+              () => {
+                deleteWine();
+              }
+            "
           ></q-btn>
         </q-card-actions>
       </q-card-section>
@@ -26,23 +30,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 import { AccessWineStore } from 'src/global/store/wineStore';
 import { wines } from 'src/global/apicalls';
-import { setAllWines } from 'src/global/store/setters';
 
-export default defineComponent ({
+export default defineComponent({
   setup(_, context) {
     const wineState = AccessWineStore();
-    
-    const deleteWine = async () => {
-      await wines.deleteWine(wineState.currentWine.id);
-      console.log('setting')
-      await setAllWines()
-      context.emit('rerenderList')
-    };
-  return {wineState, deleteWine}
-  }
-})
 
+    const deleteWine = async () => {
+      try {
+        const id = wineState.currentWineId as number
+        await wines.deleteWine(id)
+        context.emit('rerenderList');
+      } catch (err) {
+        throw err;
+      }
+    };
+    return { wineState, deleteWine };
+  },
+});
 </script>

@@ -36,7 +36,7 @@
               <q-btn
                 dense
                 color="primary"
-                @click="wineState.currentWineId = props.row.name;"
+                @click="wineState.currentWineId = props.row.id;"
                 to="/WineEncounters"
                 label="see encounters"
               ></q-btn>
@@ -85,6 +85,7 @@ const handleEditWineClick = (row: LooseDictionary) => {
 };
 
 const handleDeleteWineClick = (row: LooseDictionary) => {
+  wineState.currentWineId = (row as Wine).id;
   showDeleteDialog.value = true;
 };
 
