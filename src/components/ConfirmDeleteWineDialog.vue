@@ -2,8 +2,8 @@
   <q-dialog>
     <q-card style="width: 600px; max-width: 60vw">
       <q-card-section>
-        <div class="text-h6">Are you sure you want to delete {{ wineState.currentWineId }}?</div>
-        <p>All encounters accociated with {{ wineState.currentWine.name }} will also be deleted.</p>
+        <div class="text-h6">Are you sure you want to delete {{ props.currentWine.name || `Wine ${props.currentWine.id}` }}</div>
+        <p>All encounters accociated with {{ props.currentWine.name || `Wine ${props.currentWine.id}` }} will also be deleted.</p>
         <p>This is a PERMANENT change</p>
       </q-card-section>
       <q-separator inset></q-separator>
@@ -31,23 +31,31 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { AccessWineStore } from 'src/global/store/wineStore';
 import { wines } from 'src/global/apicalls';
+import { fetchAndSetAllWines } from 'src/global/store/setters';
 
 export default defineComponent({
-  setup(_, context) {
-    const wineState = AccessWineStore();
-
+  props: {
+    currentWine: {
+      type: Object,
+      required: true,
+    },
+  },
+  setup(props, context) {
     const deleteWine = async () => {
-      try {
-        const id = wineState.currentWineId as number
-        await wines.deleteWine(id)
+      if (props.currentWine) {
+        try {
+          await wines.deleteWine(props.currentWine.id);
+          await fetchAndSetAllWines();
+        } catch (err) {
+          throw err;
+        }
         context.emit('rerenderList');
-      } catch (err) {
-        throw err;
+      } else {
+        alert('something is wrong in the prop passing!');
       }
     };
-    return { wineState, deleteWine };
+    return { deleteWine, props };
   },
 });
 </script>

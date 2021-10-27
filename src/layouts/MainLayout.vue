@@ -25,11 +25,13 @@
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
 import { ref } from 'vue';
-const isLoading = ref(false);
+import { fetchAndSetAllWines } from 'src/global/store/setters';
+
+const isLoading = ref(true);
 const leftDrawerOpen = ref(false);
 
-/* const setStores = async () => {
-  await setAllWines();
+const setStores = async () => {
+  await fetchAndSetAllWines();
 };
 
 setStores().then(
@@ -39,7 +41,7 @@ setStores().then(
   (error) => {
     return error;
   }
-); */
+);
 
 const linksList = [
   {

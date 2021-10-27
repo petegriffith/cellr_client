@@ -35,6 +35,4 @@ export interface WineEncounter {
 export interface WineStoreContents {
   allWinesList: Wine[];
   currentWine: Wine;
-  currentWineEditable: WineUpdates;
-  currentWineId: number | null;
 }

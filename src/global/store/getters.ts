@@ -1,8 +1,11 @@
 import { AccessWineStore } from './wineStore';
-import { computed } from 'vue';
 
 const wineState = AccessWineStore()
 
-export const getCurrentEdittableWine = () => {
-    return computed(() => wineState.currentWineEditable)
+export const getCurrentWine = () => {3
+    return  wineState.currentWine
+}
+
+export const getAllWines = () => {
+    return  wineState.allWinesList
 }
