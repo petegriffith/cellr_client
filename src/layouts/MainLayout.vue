@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
 import { ref } from 'vue';
-import { setAllWines } from '../global/store/setters';
 const isLoading = ref(false);
 const leftDrawerOpen = ref(false);
 

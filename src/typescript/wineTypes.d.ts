@@ -11,6 +11,13 @@ export interface NewWine {
   name?: string | null;
   varietal?: string | null;
   vintage?: number | null;
+  color: string;
+}
+
+export interface WineUpdates {
+  name?: string | null;
+  varietal?: string | null;
+  vintage?: number | null;
   color?: string;
 }
 
@@ -28,5 +35,6 @@ export interface WineEncounter {
 export interface WineStoreContents {
   allWinesList: Wine[];
   currentWine: Wine;
+  currentWineEditable: WineUpdates;
   currentWineId: number | null;
 }

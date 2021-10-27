@@ -45,7 +45,8 @@
         </q-tr>
       </template>
     </q-table>
-    <delete-wine-dialog v-model="showDeleteDialog" @rerenderList="fetchWines" />
+    <ConfirmDeleteWineDialog v-model="showDeleteDialog" @rerenderList="fetchWines" />
+    <EditWineDialog v-model="showEditDialog"  @rerenderList="fetchWines" />
   </div>
 </template>
 
@@ -54,13 +55,16 @@ import { ref, Ref } from 'vue';
 import { convertSQLTimestamp } from 'src/global/utility/miscFunctions';
 import { Wine } from 'src/typescript/wineTypes';
 import { LooseDictionary } from 'quasar';
-import DeleteWineDialog from 'src/components/DeleteWineDialog.vue';
+import ConfirmDeleteWineDialog from 'src/components/ConfirmDeleteWineDialog.vue';
+import EditWineDialog from 'src/components/EditWineDialog.vue'
 import { wines } from 'src/global/apicalls';
 import { AccessWineStore } from 'src/global/store/wineStore';
+import { setCurrentWineEditable } from 'src/global/store/setters';
 
 const showDeleteDialog = ref(false);
 const rows: Ref<Wine[]> = ref([]);
 const wineState = AccessWineStore();
+const showEditDialog = ref(false)
 
 const columns = [
   { name: 'Wine Name', align: 'center', label: 'Wine Name', field: 'name', sortable: true },
@@ -73,7 +77,7 @@ const columns = [
 
 const fetchWines = async () => {
   // this is where a loading animation should go
-  const wineList = await wines.getWines();
+  const wineList: Wine[] = await wines.getWines();
   rows.value = wineList.map((row) => {
     row.created_at = convertSQLTimestamp(row.created_at);
     return row;
@@ -82,6 +86,8 @@ const fetchWines = async () => {
 
 const handleEditWineClick = (row: LooseDictionary) => {
   wineState.currentWineId = (row as Wine).id;
+  setCurrentWineEditable(row as Wine)
+  showEditDialog.value = true
 };
 
 const handleDeleteWineClick = (row: LooseDictionary) => {

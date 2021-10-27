@@ -1,7 +1,7 @@
 import { reactive } from 'vue';
-import { Wine, WineStoreContents } from '../../typescript/wineTypes';
+import { Wine, WineStoreContents, WineUpdates } from '../../typescript/wineTypes';
 
-// maybe not necessary?
+// maybe not necessary? 
 const allWinesList: Wine[] = [];
 
 const currentWineId: number | null = null
@@ -15,10 +15,18 @@ const currentWine: Wine = {
   created_at: '',
 }
 
+const currentWineEditable: WineUpdates = {
+  name: '',
+  varietal: '',
+  vintage: 0,
+  color: '',
+}
+
 const wineState: WineStoreContents = reactive({
   allWinesList: allWinesList,
   currentWine: currentWine,
-  currentWineId: currentWineId
+  currentWineEditable: currentWineEditable,
+  currentWineId: currentWineId,
 });
 
 export function AccessWineStore(): WineStoreContents {
