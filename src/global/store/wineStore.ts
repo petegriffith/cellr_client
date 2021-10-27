@@ -1,10 +1,8 @@
-import { reactive } from 'vue';
-import { Wine, WineStoreContents, WineUpdates } from '../../typescript/wineTypes';
+
+import { Wine, WineStoreContents } from '../../typescript/wineTypes';
 
 // maybe not necessary? 
 const allWinesList: Wine[] = [];
-
-const currentWineId: number | null = null
 
 const currentWine: Wine = {
   id: 0,
@@ -15,19 +13,10 @@ const currentWine: Wine = {
   created_at: '',
 }
 
-const currentWineEditable: WineUpdates = {
-  name: '',
-  varietal: '',
-  vintage: 0,
-  color: '',
-}
-
-const wineState: WineStoreContents = reactive({
+const wineState: WineStoreContents = {
   allWinesList: allWinesList,
   currentWine: currentWine,
-  currentWineEditable: currentWineEditable,
-  currentWineId: currentWineId,
-});
+};
 
 export function AccessWineStore(): WineStoreContents {
   return wineState;

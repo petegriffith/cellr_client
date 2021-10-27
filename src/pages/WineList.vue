@@ -17,7 +17,7 @@
               color="accent"
               round
               dense
-              @click="props.expand = !props.expand; "
+              @click="props.expand = !props.expand"
               :icon="props.expand ? 'remove' : 'add'"
             />
           </q-td>
@@ -36,7 +36,7 @@
               <q-btn
                 dense
                 color="primary"
-                @click="wineState.currentWineId = props.row.id;"
+                @click="handleEncountersClick"
                 to="/WineEncounters"
                 label="see encounters"
               ></q-btn>
@@ -45,8 +45,8 @@
         </q-tr>
       </template>
     </q-table>
-    <ConfirmDeleteWineDialog v-model="showDeleteDialog" @rerenderList="fetchWines" />
-    <EditWineDialog v-model="showEditDialog"  @rerenderList="fetchWines" />
+    <ConfirmDeleteWineDialog v-model="showDeleteDialog" :currentWine="currentWine" @rerenderList="fetchWines" />
+    <EditWineDialog v-model="showEditDialog" :currentWine="currentWine" @rerenderList="fetchWines" />
   </div>
 </template>
 
@@ -56,15 +56,21 @@ import { convertSQLTimestamp } from 'src/global/utility/miscFunctions';
 import { Wine } from 'src/typescript/wineTypes';
 import { LooseDictionary } from 'quasar';
 import ConfirmDeleteWineDialog from 'src/components/ConfirmDeleteWineDialog.vue';
-import EditWineDialog from 'src/components/EditWineDialog.vue'
+import EditWineDialog from 'src/components/EditWineDialog.vue';
 import { wines } from 'src/global/apicalls';
-import { AccessWineStore } from 'src/global/store/wineStore';
-import { setCurrentWineEditable } from 'src/global/store/setters';
+import { setCurrentWine } from 'src/global/store/setters'
 
 const showDeleteDialog = ref(false);
 const rows: Ref<Wine[]> = ref([]);
-const wineState = AccessWineStore();
-const showEditDialog = ref(false)
+const showEditDialog = ref(false);
+const currentWine: Ref<Wine> = ref({
+  id: 0,
+  name: '',
+  varietal: '',
+  vintage: 0,
+  color: '',
+  created_at: '',
+});
 
 const columns = [
   { name: 'Wine Name', align: 'center', label: 'Wine Name', field: 'name', sortable: true },
@@ -84,14 +90,17 @@ const fetchWines = async () => {
   });
 };
 
+const handleEncountersClick = (row: LooseDictionary) => {
+  setCurrentWine(row as Wine)
+}
+
 const handleEditWineClick = (row: LooseDictionary) => {
-  wineState.currentWineId = (row as Wine).id;
-  setCurrentWineEditable(row as Wine)
-  showEditDialog.value = true
+  currentWine.value = row as Wine;
+  showEditDialog.value = true;
 };
 
 const handleDeleteWineClick = (row: LooseDictionary) => {
-  wineState.currentWineId = (row as Wine).id;
+  currentWine.value = row as Wine;
   showDeleteDialog.value = true;
 };
 

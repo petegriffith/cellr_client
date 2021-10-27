@@ -1,6 +1,6 @@
 <template>
   <q-dialog>
-    <q-card v-if="wineUpdates" style="width: 600px; max-width: 60vw">
+    <q-card v-if="props.currentWine" style="width: 600px; max-width: 60vw">
       <q-card-section>
         <div class="text-h6">What would you like to edit?</div>
       </q-card-section>
@@ -9,26 +9,26 @@
 
       <q-card-section>
         <div class="cursor-pointer">
-          {{ wineUpdates.name || "Add a name" }}
-          <q-popup-edit v-model="wineUpdates.name" auto-save v-slot="scope">
+          {{ props.currentWine.name || 'Add a name' }}
+          <q-popup-edit v-model="props.currentWine.name" auto-save v-slot="scope">
             <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
           </q-popup-edit>
         </div>
         <div class="cursor-pointer">
-          {{ wineUpdates.varietal || "Add a varietal" }}
-          <q-popup-edit v-model="wineUpdates.varietal" auto-save v-slot="scope">
+          {{ props.currentWine.varietal || 'Add a varietal' }}
+          <q-popup-edit v-model="props.currentWine.varietal" auto-save v-slot="scope">
             <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
           </q-popup-edit>
         </div>
         <div class="cursor-pointer">
-          {{ wineUpdates.vintage || "Add a vintage" }}
-          <q-popup-edit v-model="wineUpdates.vintage" auto-save v-slot="scope">
+          {{ props.currentWine.vintage || 'Add a vintage' }}
+          <q-popup-edit v-model="props.currentWine.vintage" auto-save v-slot="scope">
             <q-input type="number" v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
           </q-popup-edit>
         </div>
         <div class="cursor-pointer">
-          {{ wineUpdates.color }}
-          <q-popup-edit v-model="wineUpdates.color" auto-save v-slot="scope">
+          {{ props.currentWine.color }}
+          <q-popup-edit v-model="props.currentWine.color" auto-save v-slot="scope">
             <q-input v-model="scope.value" dense autofocus counter @keyup.enter="scope.set" />
           </q-popup-edit>
         </div>
@@ -60,28 +60,21 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { wines } from 'src/global/apicalls';
-import { setAllWines, resetCurrentWineEditable } from 'src/global/store/setters';
-import { getCurrentEdittableWine } from 'src/global/store/getters';
-import { AccessWineStore } from 'src/global/store/wineStore';
+import { resetCurrentWine } from 'src/global/store/setters';
+
 
 export default defineComponent({
+  props: { currentWine: Object },
   setup(props, context) {
-    const wineState = AccessWineStore();
-    const wineUpdates = getCurrentEdittableWine();
 
     const editWine = async () => {
-      if (wineUpdates)
-        try {
-          const id = wineState.currentWineId as number;
-          await wines.patchWine(id, wineUpdates.value);
-          resetCurrentWineEditable();
-          context.emit('rerenderList');
-        } catch (err) {
-          alert(err);
-        }
+      if (props.currentWine && props.currentWine.id) {
+        await wines.patchWine(props.currentWine.id, props.currentWine);
+        resetCurrentWine();
+        context.emit('rerenderList')
+      }
     };
-
-    return { wineUpdates, editWine };
+    return { props, editWine };
   },
 });
 </script>

@@ -2,8 +2,8 @@
   <q-dialog>
     <q-card style="width: 600px; max-width: 60vw">
       <q-card-section>
-        <div class="text-h6">Are you sure you want to delete {{ wineState.currentWineId }}?</div>
-        <p>All encounters accociated with {{ wineState.currentWine.name }} will also be deleted.</p>
+        <div class="text-h6">Are you sure you want to delete {{ props.currentWine.name || `Wine ${props.currentWine.id}`}}</div>
+        <p>All encounters accociated with {{ props.currentWine.name || `Wine ${props.currentWine.id}`}} will also be deleted.</p>
         <p>This is a PERMANENT change</p>
       </q-card-section>
       <q-separator inset></q-separator>
@@ -35,19 +35,27 @@ import { AccessWineStore } from 'src/global/store/wineStore';
 import { wines } from 'src/global/apicalls';
 
 export default defineComponent({
-  setup(_, context) {
+  props: {
+    currentWine: {
+      type: Object,
+      required: true
+    },
+  },
+  setup(props, context) {
     const wineState = AccessWineStore();
 
     const deleteWine = async () => {
-      try {
-        const id = wineState.currentWineId as number
-        await wines.deleteWine(id)
-        context.emit('rerenderList');
-      } catch (err) {
-        throw err;
+      if (props.currentWine) {
+        try {
+          const id = props.currentWine.id as number;
+          await wines.deleteWine(id);
+          context.emit('rerenderList');
+        } catch (err) {
+          throw err;
+        }
       }
     };
-    return { wineState, deleteWine };
+    return { props, wineState, deleteWine };
   },
 });
 </script>
