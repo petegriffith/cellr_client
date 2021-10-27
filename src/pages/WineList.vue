@@ -36,7 +36,7 @@
               <q-btn
                 dense
                 color="primary"
-                @click="handleEncountersClick"
+                @click="handleEncountersClick(props.row)"
                 to="/WineEncounters"
                 label="see encounters"
               ></q-btn>

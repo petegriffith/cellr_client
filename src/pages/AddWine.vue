@@ -76,6 +76,7 @@
   <AddWineDialog v-model="showConfirmDialog" :newWine="newWine" @posted="winePosted = true" />
 </template>
 <script setup lang="ts">
+
 import { ref } from 'vue';
 import AddWineDialog from 'src/components/ConfirmAddWineDialog.vue';
 import { NewWine } from 'src/typescript/wineTypes';

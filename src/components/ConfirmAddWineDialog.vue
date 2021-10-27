@@ -45,9 +45,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { AccessWineStore } from 'src/global/store/wineStore';
 import { wines } from 'src/global/apicalls';
-import { setAllWines } from 'src/global/store/setters';
+import { fetchAndSetAllWines } from 'src/global/store/setters';
 import { NewWine } from 'src/typescript/wineTypes';
 
 export default defineComponent({
@@ -55,21 +54,18 @@ export default defineComponent({
     newWine: Object,
   },
   setup(props, context) {
-    const wineState = AccessWineStore();
-
     const addWine = async () => {
       if (props.newWine)
         try {
-          console.log(props.newWine)
-          console.log(await wines.postWine(props.newWine as NewWine));
-          await setAllWines();
+          await wines.postWine(props.newWine as NewWine);
+          await fetchAndSetAllWines();
           context.emit('posted');
         } catch (err) {
           alert(err);
         }
     };
 
-    return { wineState, addWine };
+    return { addWine };
   },
 });
 </script>

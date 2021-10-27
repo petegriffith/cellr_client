@@ -2,7 +2,7 @@ import { AccessWineStore } from './wineStore';
 
 const wineState = AccessWineStore()
 
-export const getCurrentWine = () => {
+export const getCurrentWine = () => {3
     return  wineState.currentWine
 }
 
