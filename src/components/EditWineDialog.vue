@@ -60,18 +60,22 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { wines } from 'src/global/apicalls';
-import { resetCurrentWine } from 'src/global/store/setters';
-
+import { fetchAndSetAllWines } from 'src/global/store/setters';
 
 export default defineComponent({
   props: { currentWine: Object },
   setup(props, context) {
-
     const editWine = async () => {
       if (props.currentWine && props.currentWine.id) {
-        await wines.patchWine(props.currentWine.id, props.currentWine);
-        resetCurrentWine();
-        context.emit('rerenderList')
+        try {
+          await wines.patchWine(props.currentWine.id, props.currentWine); 
+          await fetchAndSetAllWines()
+        } catch (err) {
+          throw err;
+        }
+        context.emit('rerenderList');
+      } else {
+        alert('something is wrong in the prop passing!');
       }
     };
     return { props, editWine };

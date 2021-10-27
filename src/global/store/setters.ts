@@ -7,7 +7,7 @@ const wineStore = AccessWineStore();
 const authStore = AccessAuthStore();
 
 // Not currently being used, table is fetching directly from the server
-export const setAllWines = async (): Promise<void> => {
+export const fetchAndSetAllWines = async (): Promise<void> => {
   const getter = await wines.getWines();
   for (const element of getter) {
     wineStore.allWinesList.push(element);

@@ -51,14 +51,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { ref, Ref, onMounted } from 'vue';
 import { convertSQLTimestamp } from 'src/global/utility/miscFunctions';
 import { Wine } from 'src/typescript/wineTypes';
 import { LooseDictionary } from 'quasar';
 import ConfirmDeleteWineDialog from 'src/components/ConfirmDeleteWineDialog.vue';
 import EditWineDialog from 'src/components/EditWineDialog.vue';
-import { wines } from 'src/global/apicalls';
 import { setCurrentWine } from 'src/global/store/setters'
+import { getAllWines } from 'src/global/store/getters';
 
 const showDeleteDialog = ref(false);
 const rows: Ref<Wine[]> = ref([]);
@@ -81,9 +81,9 @@ const columns = [
   /* { name: 'actions', label: 'Actions', field: '', align: 'center' }, */
 ];
 
-const fetchWines = async () => {
+const fetchWines = () => {
   // this is where a loading animation should go
-  const wineList: Wine[] = await wines.getWines();
+  const wineList: Wine[] = getAllWines();
   rows.value = wineList.map((row) => {
     row.created_at = convertSQLTimestamp(row.created_at);
     return row;
@@ -104,7 +104,7 @@ const handleDeleteWineClick = (row: LooseDictionary) => {
   showDeleteDialog.value = true;
 };
 
-fetchWines().catch((err) => {
-  throw err;
-});
+onMounted(() => {
+  fetchWines()
+})
 </script>
