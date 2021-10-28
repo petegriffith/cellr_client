@@ -13,7 +13,7 @@ const currentCellr = getCurrentCellr()
 const instance = axios.create({
   timeout: 10000,
   // Need to set this dynamically during login
-  cellr_id: currentCellr.id
+ /*  cellr_id: currentCellr.id */
 } as CustomAxiosRequestConfig);
 
 
@@ -32,7 +32,8 @@ export const cellrs = {
 
 export const users = {
   getUsers: (): Promise<UserData[]> => requests.get('./users'),
-  getUserById: (userId: number): Promise<UserData> => requests.get(`./users/${userId}`)
+  getUserById: (userId: number): Promise<UserData> => requests.get(`./users/${userId}`),
+  postUser: (user: UserData): Promise<void> => requests.post('./users', user),
 };
 
 export const wines = {

@@ -1,25 +1,7 @@
-import { UserData } from '../../typescript/adminTypes';
+import { getAuth, createUserWithEmailAndPassword, UserCredential } from 'firebase/auth'
 
-export const simpleLoginCheck = (
-  username: string,
-  password: string,
-  userList: UserData[]
-): false | UserData => {
-  for (const user of userList) {
-    if (
-      username.toLowerCase() === user.username.toLowerCase() &&
-      password === user.password
-    ) {
-      return user;
-    }
-  }
-  return false;
-};
 
-export const loginUserDUMMY = () => {
-  return 1
+export const registerUser = async (email: string, password: string): Promise<UserCredential> => {
+  const auth  = getAuth();
+  return await createUserWithEmailAndPassword(auth, email, password)
 }
-
-export const testFunc = () => {
-  return 'Hi there';
-};

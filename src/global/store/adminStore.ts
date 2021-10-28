@@ -2,7 +2,7 @@ import { UserData, AdminStoreContents, CellrData } from '../../typescript/adminT
 
 const currentUser: UserData = {
   username: '',
-  password: '',
+  email: '',
   cellr_id: 0,
 };
 

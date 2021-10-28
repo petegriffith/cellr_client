@@ -29,7 +29,7 @@ import { fetchAndSetAllWines, fetchAndSetCurrentUser, fetchAndSetCurrentCellr } 
 import { loginUserDUMMY } from 'src/global/utility/authFunctions';
 import { getCurrentUser } from 'src/global/store/getters';
 
-const isLoading = ref(true);
+const isLoading = ref(false);
 const leftDrawerOpen = ref(false);
 
 const loginUser = async () => {
