@@ -24,16 +24,43 @@
 
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
-import { ref } from 'vue';
-import { fetchAndSetAllWines } from 'src/global/store/setters';
+import { ref, onBeforeMount } from 'vue';
+import { fetchAndSetAllWines, fetchAndSetCurrentUser, fetchAndSetCurrentCellr } from 'src/global/store/setters';
+import { loginUserDUMMY } from 'src/global/utility/authFunctions';
+import { getCurrentUser } from 'src/global/store/getters';
 
 const isLoading = ref(true);
 const leftDrawerOpen = ref(false);
 
-const setStores = async () => {
-  await fetchAndSetAllWines();
+const loginUser = async () => {
+  try {
+    console.log('logging in user');
+    const userId = loginUserDUMMY();
+    await fetchAndSetCurrentUser(userId);
+  } catch (err) {
+    throw err;
+  }
 };
 
+const setStores = async () => {
+  try {
+    const currentUser = getCurrentUser();
+    console.log('setting cellr');
+    await fetchAndSetCurrentCellr(currentUser.cellr_id);
+    console.log('setting wines');
+    await fetchAndSetAllWines();
+  } catch (err) {
+    throw err;
+  }
+};
+
+onBeforeMount( async () => {
+  console.log('logging in...')
+  await loginUser();
+  await setStores();
+  isLoading.value = false
+})
+/* await loginUser()
 setStores().then(
   () => {
     isLoading.value = false;
@@ -41,7 +68,7 @@ setStores().then(
   (error) => {
     return error;
   }
-);
+); */
 
 const linksList = [
   {
@@ -62,7 +89,6 @@ const linksList = [
     icon: 'wine_bar',
     link: '/AddWine',
   },
-  
 ];
 
 const toggleLeftDrawer = () => {

@@ -16,6 +16,10 @@ export const simpleLoginCheck = (
   return false;
 };
 
+export const loginUserDUMMY = () => {
+  return 1
+}
+
 export const testFunc = () => {
   return 'Hi there';
 };

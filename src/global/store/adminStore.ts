@@ -1,13 +1,14 @@
 import { UserData, AdminStoreContents, CellrData } from '../../typescript/adminTypes';
 
 const currentUser: UserData = {
-  username: 'Pete',
-  password: '123',
+  username: '',
+  password: '',
+  cellr_id: 0,
 };
 
 const currentCellr: CellrData = {
-  id: 1,
-  name: 'Dev Cellr 1',
+  id: null,
+  name: '',
 };
 
 const adminState: AdminStoreContents = {
