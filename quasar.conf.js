@@ -31,6 +31,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
+      'firebase',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -87,8 +88,8 @@ module.exports = configure(function (ctx) {
       open: true, // opens browser window automatically
       proxy: {
         '/': {
-          target: 'http://cellr-server.herokuapp.com/',
-          // target: 'http://localhost:3000',
+          // target: 'http://cellr-server.herokuapp.com/',
+          target: 'http://localhost:3000',
           changeOrigin: true,
           pathRewrite: {
             '^/': ''

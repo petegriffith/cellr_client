@@ -4,13 +4,19 @@
 
 import axios, { AxiosResponse } from 'axios';
 import { Wine, WineEncounter, NewWine, WineUpdates } from '../typescript/wineTypes';
-import { UserData } from '../typescript/adminTypes';
+import { UserData, CellrData } from '../typescript/adminTypes';
 import { CustomAxiosRequestConfig } from 'src/typescript/apiTypes';
+import { getCurrentCellr, getCurrentUser } from './store/getters';
+
+const currentCellr = getCurrentCellr()
+const currentUser = getCurrentUser()
 
 const instance = axios.create({
   timeout: 10000,
-  cellr_id: 1
+  // Need to set this dynamically during login
+  cellr_id: currentCellr.id
 } as CustomAxiosRequestConfig);
+
 
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
@@ -21,9 +27,13 @@ const requests = {
   delete: (url: string,) => instance.delete(url).then(responseBody),
 };
 
+export const cellrs = {
+  getCellrById: (cellrId: number): Promise<CellrData> => requests.get(`./cellrs/${cellrId}`)
+}
+
 export const users = {
   getUsers: (): Promise<UserData[]> => requests.get('./users'),
-  getUserById: (userId: number): Promise<UserData> => requests.get(`./users${userId}`)
+  getUserById: (userId: number): Promise<UserData> => requests.get(`./users/${userId}`)
 };
 
 export const wines = {
