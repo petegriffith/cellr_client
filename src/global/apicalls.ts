@@ -4,11 +4,13 @@
 
 import axios, { AxiosResponse } from 'axios';
 import { Wine, WineEncounter, NewWine, WineUpdates } from '../typescript/wineTypes';
-import { UserData } from '../typescript/authTypes';
+import { UserData } from '../typescript/adminTypes';
+import { CustomAxiosRequestConfig } from 'src/typescript/apiTypes';
 
 const instance = axios.create({
   timeout: 10000,
-});
+  cellr_id: 1
+} as CustomAxiosRequestConfig);
 
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
@@ -21,6 +23,7 @@ const requests = {
 
 export const users = {
   getUsers: (): Promise<UserData[]> => requests.get('./users'),
+  getUserById: (userId: number): Promise<UserData> => requests.get(`./users${userId}`)
 };
 
 export const wines = {

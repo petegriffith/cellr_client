@@ -1,4 +1,4 @@
-import { UserData } from '../../typescript/authTypes';
+import { UserData } from '../../typescript/adminTypes';
 
 export const simpleLoginCheck = (
   username: string,

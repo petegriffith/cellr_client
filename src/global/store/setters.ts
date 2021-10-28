@@ -1,14 +1,17 @@
-import { AccessAuthStore } from './authStore';
+import { AccessAdminStore } from './adminStore';
 import { AccessWineStore } from './wineStore';
 import { wines, users } from '../apicalls';
 import { Wine } from '../../typescript/wineTypes';
 
 const wineStore = AccessWineStore();
-const authStore = AccessAuthStore();
+const adminStore = AccessAdminStore();
 
-// Not currently being used, table is fetching directly from the server
+export const fetchAndSetCurrentUser = async (userId: number): Promise<void> => {
+  adminStore.currentUser = await users.getUserById(userId)
+}
+
 export const fetchAndSetAllWines = async (): Promise<void> => {
-  wineStore.allWinesList = await wines.getWines() 
+  wineStore.allWinesList = await wines.getWines();
 };
 
 export const setCurrentWine = (selectedWine: Wine): void => {
@@ -23,12 +26,6 @@ export const resetCurrentWine = () => {
     vintage: 0,
     color: '',
     created_at: '',
-  }
-}
-
-export const setAllUsers = async (): Promise<void> => {
-  const getter = await users.getUsers();
-  for (const element of getter) {
-    authStore.userList.push(element);
-  }
+  };
 };
+
