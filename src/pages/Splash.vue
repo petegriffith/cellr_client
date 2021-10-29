@@ -16,12 +16,12 @@
 </template>
 
 <script setup lang="ts">
-import { checkUser, logoutUser } from 'src/global/utility/authFunctions';
+import { checkFirebaseUser, logoutUser } from 'src/global/utility/authFunctions';
 import { getCurrentUser } from 'src/global/store/getters';
 import { resetCurrentUser } from 'src/global/store/setters';
 
 const checkUserHandler = () => {
-  const firebaseUserData = checkUser()
+  const firebaseUserData = checkFirebaseUser()
   const localUserData = getCurrentUser()
   console.log('firebase:', firebaseUserData.currentUser)
   console.log('local:', localUserData)

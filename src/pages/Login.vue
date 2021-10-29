@@ -54,6 +54,6 @@ const handleLoginClick = async () => {
 
   isLoggingIn.value = false;
   // route user
-  await router.replace({ name: 'Splash' });
+  await router.replace({ name: 'userCellr' });
 };
 </script>

@@ -2,22 +2,24 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/preAuth',
     component: () => import('layouts/PreAuth.vue'),
     children: [
-      { alias:'', path: 'Splash', name: 'Splash', component: () => import('src/pages/Splash.vue')},
-      { path: 'Login', component: () => import('src/pages/Login.vue')},
-      { path: 'Register', component: () => import('src/pages/Register.vue')}
+      { alias:'', path: '/splash', name: 'Splash', component: () => import('src/pages/Splash.vue')},
+      { path: '/login', component: () => import('src/pages/Login.vue')},
+      { path: '/register', component: () => import('src/pages/Register.vue')}
     ]
   },
   {
-    path: '/yourCellr',
+    path: '/userCellr',
+    name: 'userCellr',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: 'WineList', component: () => import('src/pages/WineList.vue') },
-      { path: 'AddWine', component: () => import('src/pages/AddWine.vue') },
-      { path: 'WineEncounters', component: () => import('src/pages/WineEncounters.vue') },
+      { path: '/wineList', component: () => import('src/pages/WineList.vue') },
+      { path: '/addWine', component: () => import('src/pages/AddWine.vue') },
+      { path: '/wineEncounters', component: () => import('src/pages/WineEncounters.vue') },
     ],
+    meta: { requiresAuth: true }
   },
 
   // Always leave this as last one,

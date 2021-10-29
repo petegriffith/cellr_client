@@ -67,6 +67,6 @@ const handleRegisterClick = async () => {
   }
   isRegistering.value = false;
 
-  await router.replace({ name: 'Splash' });
+  await router.replace({ name: 'userCellr' });
 };
 </script>

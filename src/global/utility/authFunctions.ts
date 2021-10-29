@@ -31,6 +31,6 @@ export const logoutUser = async (): Promise<void> => {
   await signOut(auth);
 };
 
-export const checkUser = () => {
+export const checkFirebaseUser = () => {
   return getAuth()
 }

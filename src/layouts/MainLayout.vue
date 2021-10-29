@@ -5,6 +5,8 @@
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> cellr. </q-toolbar-title>
+
+         <q-btn flat round dense icon="person_search" @click="checkUserHandler">Check User </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -27,6 +29,7 @@ import DrawerLink from 'components/DrawerLink.vue';
 import { ref, onBeforeMount } from 'vue';
 import { fetchAndSetAllWines, fetchAndSetCurrentCellr } from 'src/global/store/setters';
 import { getCurrentUser } from 'src/global/store/getters';
+import { checkFirebaseUser } from 'src/global/utility/authFunctions';
 
 const isLoading = ref(false);
 const leftDrawerOpen = ref(false);
@@ -93,4 +96,11 @@ const linksList = [
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
+
+const checkUserHandler = () => {
+  const firebaseUserData = checkFirebaseUser()
+  const localUserData = getCurrentUser()
+  console.log('firebase:', firebaseUserData.currentUser)
+  console.log('local:', localUserData)
+}
 </script>

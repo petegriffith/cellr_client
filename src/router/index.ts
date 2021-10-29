@@ -1,4 +1,5 @@
 import { route } from 'quasar/wrappers';
+import { getAuth } from '@firebase/auth';
 import {
   createMemoryHistory,
   createRouter,
@@ -25,6 +26,8 @@ export default route(function (/* { store, ssrContext } */) {
     scrollBehavior: () => ({ left: 0, top: 0 }),
     routes,
 
+   
+
     // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
@@ -32,6 +35,14 @@ export default route(function (/* { store, ssrContext } */) {
       process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE
     ),
   });
+
+  Router.beforeEach((to, from, next) => {
+    const auth = getAuth()
+    // if (!auth && from.path !== '/preAuth')
+    console.log('from meta:', from.meta)
+    /* next({ name: 'Splash' }) */
+    next()
+  })
 
   return Router;
 });
