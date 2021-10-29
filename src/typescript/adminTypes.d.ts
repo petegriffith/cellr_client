@@ -1,6 +1,7 @@
 export interface UserData {
+  id?: number
   username: string;
-  password: string;
+  email: string;
   cellr_id: number;
 }
 

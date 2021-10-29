@@ -6,15 +6,14 @@ import axios, { AxiosResponse } from 'axios';
 import { Wine, WineEncounter, NewWine, WineUpdates } from '../typescript/wineTypes';
 import { UserData, CellrData } from '../typescript/adminTypes';
 import { CustomAxiosRequestConfig } from 'src/typescript/apiTypes';
-import { getCurrentCellr, getCurrentUser } from './store/getters';
+/* import { getCurrentCellr } from './store/getters'; */
 
-const currentCellr = getCurrentCellr()
-const currentUser = getCurrentUser()
+/* const currentCellr = getCurrentCellr() */
 
 const instance = axios.create({
   timeout: 10000,
   // Need to set this dynamically during login
-  cellr_id: currentCellr.id
+ /*  cellr_id: currentCellr.id */
 } as CustomAxiosRequestConfig);
 
 
@@ -33,7 +32,8 @@ export const cellrs = {
 
 export const users = {
   getUsers: (): Promise<UserData[]> => requests.get('./users'),
-  getUserById: (userId: number): Promise<UserData> => requests.get(`./users/${userId}`)
+  getUserByEmail: (email: string): Promise<UserData> => requests.get(`./users/${email}`),
+  postUser: (user: UserData): Promise<void> => requests.post('./users', user),
 };
 
 export const wines = {
