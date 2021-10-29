@@ -6,9 +6,9 @@ import axios, { AxiosResponse } from 'axios';
 import { Wine, WineEncounter, NewWine, WineUpdates } from '../typescript/wineTypes';
 import { UserData, CellrData } from '../typescript/adminTypes';
 import { CustomAxiosRequestConfig } from 'src/typescript/apiTypes';
-import { getCurrentCellr } from './store/getters';
+/* import { getCurrentCellr } from './store/getters'; */
 
-const currentCellr = getCurrentCellr()
+/* const currentCellr = getCurrentCellr() */
 
 const instance = axios.create({
   timeout: 10000,

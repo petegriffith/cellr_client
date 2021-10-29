@@ -32,6 +32,7 @@ const isPwd = ref(true)
 const password = ref('')
 const email = ref('')
 const username = ref('')
+// Need to sort out how to set this
 const cellr_id = ref(1)
 
 const handleRegisterClick = async () => {

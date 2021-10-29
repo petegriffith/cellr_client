@@ -25,14 +25,13 @@
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
 import { ref, onBeforeMount } from 'vue';
-import { fetchAndSetAllWines, fetchAndSetCurrentUser, fetchAndSetCurrentCellr } from 'src/global/store/setters';
-import { loginUserDUMMY } from 'src/global/utility/authFunctions';
+import { fetchAndSetAllWines, fetchAndSetCurrentCellr } from 'src/global/store/setters';
 import { getCurrentUser } from 'src/global/store/getters';
 
 const isLoading = ref(false);
 const leftDrawerOpen = ref(false);
 
-const loginUser = async () => {
+/* const loginUser = async () => {
   try {
     console.log('logging in user');
     const userId = loginUserDUMMY();
@@ -40,7 +39,7 @@ const loginUser = async () => {
   } catch (err) {
     throw err;
   }
-};
+}; */
 
 const setStores = async () => {
   try {
@@ -56,7 +55,7 @@ const setStores = async () => {
 
 onBeforeMount( async () => {
   console.log('logging in...')
-  await loginUser();
+  /* await loginUser(); */
   await setStores();
   isLoading.value = false
 })
