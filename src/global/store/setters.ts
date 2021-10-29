@@ -6,13 +6,13 @@ import { Wine } from '../../typescript/wineTypes';
 const wineStore = AccessWineStore();
 const adminStore = AccessAdminStore();
 
-export const fetchAndSetCurrentUser = async (userId: number): Promise<void> => {
-  adminStore.currentUser = await users.getUserById(userId)
-}
+export const fetchAndSetCurrentUser = async (email: string): Promise<void> => {
+  adminStore.currentUser = await users.getUserByEmail(email);
+};
 
 export const fetchAndSetCurrentCellr = async (cellrId: number): Promise<void> => {
-  adminStore.currentCellr = await cellrs.getCellrById(cellrId)
-}
+  adminStore.currentCellr = await cellrs.getCellrById(cellrId);
+};
 
 export const fetchAndSetAllWines = async (): Promise<void> => {
   wineStore.allWinesList = await wines.getWines();
@@ -33,3 +33,10 @@ export const resetCurrentWine = () => {
   };
 };
 
+export const resetCurrentUser = () => {
+  adminStore.currentUser = {
+    username: '',
+    email: '',
+    cellr_id: 0,
+  };
+};

@@ -1,5 +1,5 @@
 <template>
-  <q-card class="text-center" style="max-width: 40vw">
+  <q-card v-if="!isLoggingIn" class="text-center" style="max-width: 40vw">
     <q-card-section>
       <div class="text-h4">Let's log you in...</div>
     </q-card-section>
@@ -17,22 +17,43 @@
       <q-btn flat @click="$router.replace({ name: 'Splash' })">Back to Splash</q-btn>
     </q-card-actions>
   </q-card>
+  <q-card v-else class="text-center" style="max-width: 40vw">
+    <q-card-section>
+      <div class="text-h4">Logging in...</div>
+    </q-card-section>
+    <q-separator dark></q-separator>
+    <q-card-section>
+      <div>
+        <q-spinner-hourglass color="primary" size="4em" />
+      </div>
+    </q-card-section>
+  </q-card>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { loginUser } from 'src/global/utility/authFunctions'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { loginUser } from 'src/global/utility/authFunctions';
+import { fetchAndSetCurrentUser } from 'src/global/store/setters';
 
-const password = ref('')
-const email = ref('')
-const isPwd = ref(true)
-const router = useRouter()
+const isLoggingIn = ref(false);
+const password = ref('');
+const email = ref('');
+const isPwd = ref(true);
+
+const router = useRouter();
 
 const handleLoginClick = async () => {
-  const firebaseResponse = await loginUser(email.value, password.value)
-  console.log(firebaseResponse)
+  isLoggingIn.value = true;
+
+  const userCredential = await loginUser(email.value, password.value);
+
+  if (userCredential) {
+    await fetchAndSetCurrentUser(userCredential.user.email!);
+  }
+
+  isLoggingIn.value = false;
   // route user
-  await router.replace({ name: 'Splash' })
-}
+  await router.replace({ name: 'Splash' });
+};
 </script>

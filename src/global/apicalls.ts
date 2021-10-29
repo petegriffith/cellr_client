@@ -32,7 +32,7 @@ export const cellrs = {
 
 export const users = {
   getUsers: (): Promise<UserData[]> => requests.get('./users'),
-  getUserById: (userId: number): Promise<UserData> => requests.get(`./users/${userId}`),
+  getUserByEmail: (email: string): Promise<UserData> => requests.get(`./users/${email}`),
   postUser: (user: UserData): Promise<void> => requests.post('./users', user),
 };
 

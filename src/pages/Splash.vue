@@ -17,13 +17,18 @@
 
 <script setup lang="ts">
 import { checkUser, logoutUser } from 'src/global/utility/authFunctions';
+import { getCurrentUser } from 'src/global/store/getters';
+import { resetCurrentUser } from 'src/global/store/setters';
 
 const checkUserHandler = () => {
-  const userData = checkUser()
-  console.log(userData.currentUser)
+  const firebaseUserData = checkUser()
+  const localUserData = getCurrentUser()
+  console.log('firebase:', firebaseUserData.currentUser)
+  console.log('local:', localUserData)
 }
 
 const logoutUserHandler = async () => {
   await logoutUser()
+  resetCurrentUser()
 }
 </script>
