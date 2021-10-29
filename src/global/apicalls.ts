@@ -5,22 +5,17 @@
 import axios, { AxiosResponse } from 'axios';
 import { Wine, WineEncounter, NewWine, WineUpdates } from '../typescript/wineTypes';
 import { UserData, CellrData } from '../typescript/adminTypes';
-import { CustomAxiosRequestConfig } from 'src/typescript/apiTypes';
-/* import { getCurrentCellr } from './store/getters'; */
-
-/* const currentCellr = getCurrentCellr() */
+import { getCurrentCellr } from './store/getters';
 
 const instance = axios.create({
   timeout: 10000,
-  // Need to set this dynamically during login
- /*  cellr_id: currentCellr.id */
-} as CustomAxiosRequestConfig);
+});
 
 
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
 const requests = {
-  get: (url: string) => instance.get(url).then(responseBody),
+  get: (url: string, cellr_id = getCurrentCellr().id) => instance.get(url, { headers: {'cellr_id': cellr_id}} ).then(responseBody),
   post: (url: string, data: any) => instance.post(url, data).then(responseBody),
   patch: (url: string, data: any) => instance.patch(url, data).then(responseBody),
   delete: (url: string,) => instance.delete(url).then(responseBody),
@@ -31,7 +26,7 @@ export const cellrs = {
 }
 
 export const users = {
-  getUsers: (): Promise<UserData[]> => requests.get('./users'),
+  getUsers: (): Promise<UserData[]> => requests.get('./users',),
   getUserByEmail: (email: string): Promise<UserData> => requests.get(`./users/${email}`),
   postUser: (user: UserData): Promise<void> => requests.post('./users', user),
 };
