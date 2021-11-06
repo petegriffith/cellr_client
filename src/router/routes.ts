@@ -17,7 +17,7 @@ const routes: RouteRecordRaw[] = [
     name: 'userCellr',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '/wineList', component: () => import('src/pages/WineList.vue') },
+      { alias:'', path: '/wineList', component: () => import('src/pages/WineList.vue') },
       { path: '/addWine', component: () => import('src/pages/AddWine.vue') },
       { path: '/wineEncounters', component: () => import('src/pages/WineEncounters.vue') },
     ],

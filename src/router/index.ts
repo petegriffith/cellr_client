@@ -33,7 +33,7 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach(async (to, from, next) => {
     const auth = getAuth();
 
-    const user = await new Promise((resolve, reject) => {
+    const user = await new Promise((resolve) => {
       onAuthStateChanged(auth, (user) => {
         if (user && user.email) {
           void fetchAndSetCurrentUser(user.email);

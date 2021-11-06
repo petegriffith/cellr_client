@@ -33,6 +33,7 @@ import { ref, onBeforeMount } from 'vue';
 import { fetchAndSetAllWines, fetchAndSetCurrentCellr, resetCurrentUser } from 'src/global/store/setters';
 import { getCurrentUser } from 'src/global/store/getters';
 import { checkFirebaseUser, logoutUser } from 'src/global/utility/authFunctions';
+/* import { useRouter } from 'vue-router'; */
 
 const isLoading = ref(true);
 const leftDrawerOpen = ref(false);
@@ -90,5 +91,7 @@ const checkUserHandler = () => {
 const logoutUserHandler = async () => {
   await logoutUser();
   resetCurrentUser();
+  /* const router = useRouter();
+  await router.replace({ name: 'PreAuth Layout' }); */
 };
 </script>

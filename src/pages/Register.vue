@@ -56,14 +56,14 @@ const handleRegisterClick = async () => {
   //validate password and email here
   const userCredential = await registerUser(email.value, password.value);
   // automatically sending user through (no email validation, etc)
-  if (userCredential) {
+  if (userCredential && userCredential.user.email) {
     const newUser: UserData = {
       email: email.value,
       username: username.value,
       cellr_id: cellr_id.value,
     };
     await users.postUser(newUser);
-    await fetchAndSetCurrentUser(userCredential.user.email!);
+    await fetchAndSetCurrentUser(userCredential.user.email);
   }
   isRegistering.value = false;
 
