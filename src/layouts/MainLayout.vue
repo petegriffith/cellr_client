@@ -6,8 +6,9 @@
 
         <q-toolbar-title> cellr. </q-toolbar-title>
 
-         <q-btn flat round dense icon="person_search" @click="checkUserHandler">Check User </q-btn>
-         <q-btn flat round dense icon="logout" @click="logoutUserHandler">Logout User </q-btn>
+         <q-btn flat round dense icon="person_search" @click="checkUserHandler">{{$t('checkUser')}}</q-btn>
+         <q-btn flat round dense icon="logout" @click="logoutUserHandler">{{$t('logout')}} </q-btn>
+         <LocaleSwitcher />
       </q-toolbar>
     </q-header>
 
@@ -27,10 +28,12 @@
 
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
+import LocaleSwitcher from 'src/components/LocaleSwitcher.vue';
 import { ref, onBeforeMount } from 'vue';
 import { fetchAndSetAllWines, fetchAndSetCurrentCellr, resetCurrentUser } from 'src/global/store/setters';
 import { getCurrentUser } from 'src/global/store/getters';
 import { checkFirebaseUser, logoutUser } from 'src/global/utility/authFunctions';
+import { getAuth } from '@firebase/auth';
 
 const isLoading = ref(false);
 const leftDrawerOpen = ref(false);
@@ -103,6 +106,7 @@ const checkUserHandler = () => {
   const localUserData = getCurrentUser()
   console.log('firebase:', firebaseUserData.currentUser)
   console.log('local:', localUserData)
+  console.log('auth:', getAuth())
 }
 
 const logoutUserHandler = async () => {
