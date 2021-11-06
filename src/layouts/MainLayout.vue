@@ -6,9 +6,9 @@
 
         <q-toolbar-title> cellr. </q-toolbar-title>
 
-         <q-btn flat round dense icon="person_search" @click="checkUserHandler">{{$t('checkUser')}}</q-btn>
-         <q-btn flat round dense icon="logout" @click="logoutUserHandler">{{$t('logout')}} </q-btn>
-         <LocaleSwitcher />
+        <q-btn flat round dense icon="person_search" @click="checkUserHandler">{{ $t('checkUser') }}</q-btn>
+        <q-btn flat round dense icon="logout" @click="logoutUserHandler">{{ $t('logout') }} </q-btn>
+        <LocaleSwitcher />
       </q-toolbar>
     </q-header>
 
@@ -33,20 +33,9 @@ import { ref, onBeforeMount } from 'vue';
 import { fetchAndSetAllWines, fetchAndSetCurrentCellr, resetCurrentUser } from 'src/global/store/setters';
 import { getCurrentUser } from 'src/global/store/getters';
 import { checkFirebaseUser, logoutUser } from 'src/global/utility/authFunctions';
-import { getAuth } from '@firebase/auth';
 
-const isLoading = ref(false);
+const isLoading = ref(true);
 const leftDrawerOpen = ref(false);
-
-/* const loginUser = async () => {
-  try {
-    console.log('logging in user');
-    const userId = loginUserDUMMY();
-    await fetchAndSetCurrentUser(userId);
-  } catch (err) {
-    throw err;
-  }
-}; */
 
 const setStores = async () => {
   try {
@@ -60,21 +49,11 @@ const setStores = async () => {
   }
 };
 
-onBeforeMount( async () => {
-  console.log('logging in...')
-  /* await loginUser(); */
+onBeforeMount(async () => {
+  console.log('logging in...');
   await setStores();
-  isLoading.value = false
-})
-/* await loginUser()
-setStores().then(
-  () => {
-    isLoading.value = false;
-  },
-  (error) => {
-    return error;
-  }
-); */
+  isLoading.value = false;
+});
 
 const linksList = [
   {
@@ -102,15 +81,14 @@ const toggleLeftDrawer = () => {
 };
 
 const checkUserHandler = () => {
-  const firebaseUserData = checkFirebaseUser()
-  const localUserData = getCurrentUser()
-  console.log('firebase:', firebaseUserData.currentUser)
-  console.log('local:', localUserData)
-  console.log('auth:', getAuth())
-}
+  const firebaseUserData = checkFirebaseUser();
+  const localUserData = getCurrentUser();
+  console.log('firebase:', firebaseUserData.currentUser);
+  console.log('local:', localUserData);
+};
 
 const logoutUserHandler = async () => {
-  await logoutUser()
-  resetCurrentUser()
-}
+  await logoutUser();
+  resetCurrentUser();
+};
 </script>

@@ -1,5 +1,5 @@
 import { FirebaseError } from '@firebase/util';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, UserCredential } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, UserCredential, setPersistence, browserLocalPersistence } from 'firebase/auth'
 
 
 export const registerUser = async (email: string, password: string): Promise<UserCredential | void> => {
@@ -17,6 +17,7 @@ export const registerUser = async (email: string, password: string): Promise<Use
 export const loginUser = async (email: string, password: string): Promise<UserCredential | void> => {
   const auth = getAuth()
   try {
+    await setPersistence(auth, browserLocalPersistence)
     return await signInWithEmailAndPassword(auth, email, password)
   } catch (err: unknown) {
     if (err instanceof FirebaseError) {

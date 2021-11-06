@@ -1,7 +1,8 @@
 import { route } from 'quasar/wrappers';
-import { getAuth } from '@firebase/auth';
+import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import routes from './routes';
+import { fetchAndSetCurrentUser } from 'src/global/store/setters';
 
 /*
  * If not building with SSR mode, you can
@@ -29,10 +30,20 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.MODE === 'ssr' ? void 0 : process.env.VUE_ROUTER_BASE),
   });
 
-  Router.beforeEach((to, from, next) => {
+  Router.beforeEach(async (to, from, next) => {
     const auth = getAuth();
-    if (!auth.currentUser && to.meta.authRequired !== false) {
-      alert('for some reason you have been logged out!')
+
+    const user = await new Promise((resolve, reject) => {
+      onAuthStateChanged(auth, (user) => {
+        if (user && user.email) {
+          void fetchAndSetCurrentUser(user.email);
+        }
+        resolve(user);
+      });
+    });
+
+    if (!user && to.meta.authRequired !== false) {
+      alert('for some reason you have been logged out!');
       next({ name: 'Splash' });
     } else {
       next();
