@@ -26,5 +26,8 @@
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#58181f99",
     "titleBar.inactiveForeground": "#e7e7e799"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "src/i18n"
+  ]
 }
