@@ -1,5 +1,5 @@
-import en from './en'
-import jp from './jp'
+import en from './locales/en.json'
+import jp from './locales/ja.json'
 
 export default {
   'en': en,
