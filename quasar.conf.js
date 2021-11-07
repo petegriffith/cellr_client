@@ -31,6 +31,7 @@ module.exports = configure(function (ctx) {
     boot: [
       'i18n',
       'axios',
+      'firebase',
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -86,9 +87,9 @@ module.exports = configure(function (ctx) {
       port: 8080,
       open: true, // opens browser window automatically
       proxy: {
-        // proxy all requests starting with /api to jsonplaceholder
         '/': {
-          target: 'http://localhost:3000/',
+          // target: 'http://cellr-server.herokuapp.com/',
+          target: 'http://localhost:3000',
           changeOrigin: true,
           pathRewrite: {
             '^/': ''
@@ -99,7 +100,20 @@ module.exports = configure(function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
-      config: {},
+      config: {
+        brand: {
+          primary: '#58181f',
+          secondary: '#26A69A',
+          accent: '#9C27B0',
+  
+          dark: '#1d1d1d',
+  
+          positive: '#21BA45',
+          negative: '#C10015',
+          info: '#31CCEC',
+          warning: '#F2C037'
+        }
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack

@@ -1,1 +1,7 @@
 /* app global css */
+.grayed-out {
+  color: gray;
+}
+
+/* class="fit column    content-center"
+class="q-pa-md fit row justify-evenly items-center content-start" */
