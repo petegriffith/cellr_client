@@ -8,7 +8,7 @@ const instance = axios.create({
   timeout: 10000,
 });
 
-const serverURL = 'http://cellr-server.herokuapp.com';
+const serverURL = 'https://cellr-server.herokuapp.com';
 
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
