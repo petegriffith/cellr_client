@@ -37,7 +37,7 @@ export default route(function (/* { store, ssrContext } */) {
     const user = await new Promise((resolve) => {
       onAuthStateChanged(auth, (user) => {
         if (user && user.email) {
-          void fetchAndSetCurrentUser(user.email, getCurrentCellr().id as number);
+          void fetchAndSetCurrentUser(user.email, getCurrentCellr().id);
         }
         resolve(user);
       });
