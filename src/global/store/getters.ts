@@ -9,8 +9,6 @@ export const getCurrentUser = () => {
 }
 
 export const getCurrentCellr = () => {
-    console.log('adminState:', adminState)
-    console.log('getting cellr:', adminState.currentCellr)
     return adminState.currentCellr
 }
 
