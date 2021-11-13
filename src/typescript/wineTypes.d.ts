@@ -1,3 +1,5 @@
+
+
 interface Wine {
   id: number;
   name?: string;
@@ -32,10 +34,6 @@ interface WineEncounter {
   encounter_date: string;
 }
 
-interface WineStoreContents {
-  allWinesList: Wine[];
-  currentWine: Wine;
-}
 
 interface NewEncounter {
   wine_id: number
