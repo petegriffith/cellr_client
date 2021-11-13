@@ -1,8 +1,6 @@
 <template>
-  <q-card v-if="currentWine.id < 1">Which wine would you like to encounter?</q-card>
   <q-card v-if="!encounterPosted" class="q-ma-xl q-pa-md">
     <div class="card-title fit row justify-center">
-      <h1>{{currentWine}}</h1>
       <h5>Adding an encounter for {{ currentWine.name }}</h5>
     </div>
     <div class="fit row justify-center">
@@ -99,14 +97,15 @@
     </div>
   </q-card>
 
-  <div v-else>
-    You've successfully added your encounter!
-  </div>
-  <AddEncounterDialog v-model="showConfirmDialog" :newEncounter="newEncounter" @posted="encounterPosted = true"/>
+  <div v-else>You've successfully added your encounter!</div>
+  <AddEncounterDialog v-model="showConfirmDialog" :newEncounter="newEncounter" @posted="encounterPosted = true" />
+  <SelectWineToEncounterDialog v-model="showSelectDialog" />
 </template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import AddEncounterDialog from 'src/components/ConfirmAddEncounterDialog.vue';
+import SelectWineToEncounterDialog from 'src/components/SelectWineToEncounterDialog.vue';
 import { getCurrentUser, getCurrentWine } from 'src/global/store/getters';
 
 const currentWine = getCurrentWine();
@@ -118,15 +117,18 @@ const rating = ref(0);
 const date = ref('');
 const notes = ref('');
 const showConfirmDialog = ref(false);
-const encounterPosted = ref(false)
+const encounterPosted = ref(false);
+const showSelectDialog = ref(false);
 const priceToggle = ref('I know the bottle price');
 const locationToggle = ref('I know where the wine was bought');
 const ratingToggle = ref('I want to rate the wine');
 const dateToggle = ref('I want to set the encounter date');
 const notesToggle = ref('I want to add some notes');
-const newEncounter: NewEncounter = { notes: '', wine_id: currentWine.id, user_id: currentUser.id };
+const newEncounter: NewEncounter = { notes: '', wine_id: currentWine.value.id, user_id: currentUser.id };
 
-if (currentWine.name) newEncounter.wine_name = currentWine.name
+if (currentWine.value.name) newEncounter.wine_name = currentWine.value.name;
+
+if (currentWine.value.id < 1) showSelectDialog.value = true
 
 const lowRatingRule = (val: number) =>
   val >= 0 || "You can't go lower than zero. Zero is the lowest rating. You are a barbarian.";
