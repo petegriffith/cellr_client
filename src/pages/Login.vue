@@ -50,7 +50,7 @@ const handleLoginClick = async () => {
   const userCredential = await loginUser(email.value, password.value);
 
   if (userCredential && userCredential.user.email) {
-    await fetchAndSetCurrentUser(userCredential.user.email, getCurrentCellr().id as number);
+    await fetchAndSetCurrentUser(userCredential.user.email, getCurrentCellr().id);
   }
 
   isLoggingIn.value = false;

@@ -18,11 +18,11 @@ export const fetchAndSetAllWines = async (cellrId: number): Promise<void> => {
 };
 
 export const setCurrentWine = (selectedWine: Wine): void => {
-  wineStore.currentWine = selectedWine;
+  wineStore.currentWine.value = selectedWine;
 };
 
 export const resetCurrentWine = () => {
-  wineStore.currentWine = {
+  wineStore.currentWine.value = {
     id: 0,
     name: '',
     varietal: '',
