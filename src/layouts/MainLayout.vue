@@ -44,7 +44,7 @@ const setStores = async () => {
     console.log('setting cellr');
     await fetchAndSetCurrentCellr(currentUser.cellr_id);
     console.log('setting wines');
-    await fetchAndSetAllWines();
+    await fetchAndSetAllWines(currentUser.cellr_id);
   } catch (err) {
     throw err;
   }
@@ -58,7 +58,7 @@ onBeforeMount(async () => {
 
 const linksList = [
   {
-    title: 'AllWines?',
+    title: 'AllWines',
     caption: 'All of the wines in your cellr',
     icon: 'wine_bar',
     link: '/WineList',
@@ -74,6 +74,12 @@ const linksList = [
     caption: 'Add a new wine to your cellr',
     icon: 'wine_bar',
     link: '/AddWine',
+  },
+  {
+    title: 'Add an Encounter',
+    caption: 'Add a new encounter to one of your wines',
+    icon: 'wine_bar',
+    link: '/AddEncounter',
   },
 ];
 

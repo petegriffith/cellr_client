@@ -13,33 +13,33 @@ const serverURL = 'https://cellr-server.herokuapp.com';
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
 const requests = {
-  // sometimes when the page refreshes, getCurrentCellr() doesn't resolve quickly enough and it returns undefined. Sometimes.
-  get: (url: string, cellr_id = getCurrentCellr().id) =>
-    instance.get(url,  { headers: {'cellr_id': cellr_id}} ).then(responseBody),
+
+  get: (url: string, cellr_id: number) => instance.get(url, { headers: {'cellr_id': cellr_id}} ).then(responseBody),
+
   post: (url: string, data: any) => instance.post(url, data).then(responseBody),
   patch: (url: string, data: any) => instance.patch(url, data).then(responseBody),
   delete: (url: string) => instance.delete(url).then(responseBody),
 };
 
 export const cellrs = {
-  getCellrById: (cellrId: number): Promise<CellrData> => requests.get(`${serverURL}/cellrs/${cellrId}`),
-};
+  getCellrById: (cellrId: number): Promise<CellrData> => requests.get(`./cellrs/${cellrId}`, cellrId)
+}
 
 export const users = {
-  getUsers: (): Promise<UserData[]> => requests.get(`${serverURL}/users/all`),
-  getUserByEmail: (email: string): Promise<UserData> => requests.get(`${serverURL}/users/${email}`),
-  postUser: (user: UserData): Promise<void> => requests.post(`${serverURL}/users`, user),
+  getUsers: (cellrId: number): Promise<UserData[]> => requests.get('./users/all', cellrId),
+  getUserByEmail: (email: string, cellrId: number): Promise<UserData> => requests.get(`./users/${email}`, cellrId),
+  postUser: (user: NewUserData): Promise<void> => requests.post('./users', user),
 };
 
 export const wines = {
-  getWines: (): Promise<Wine[]> => requests.get(`${serverURL}/wines/all`),
-  postWine: (wine: NewWine): Promise<void> => requests.post(`${serverURL}/wines`, wine),
-  patchWine: (id: number, updates: WineUpdates) => requests.patch(`${serverURL}/wines/${id}`, updates),
-  deleteWine: (id: number): Promise<void> => requests.delete(`${serverURL}/wines/${id}`),
+  getWines: (cellrId: number): Promise<Wine[]> => requests.get('./wines/all', cellrId),
+  postWine: (wine: NewWine): Promise<void> => requests.post('./wines', wine),
+  patchWine: (id: number, updates: WineUpdates) => requests.patch(`/wines/${id}`, updates),
+  deleteWine: (id: number): Promise<void> => requests.delete(`/wines/${id}`),
 };
 
 export const encounters = {
-  getEncountersByWineId: (wineId: number): Promise<WineEncounter[]> => requests.get(`${serverURL}/encounters/fromWine/${wineId}`),
+  getEncountersByWineId: (wineId: number, cellrId: number): Promise<WineEncounter[]> => requests.get(`./encounters/fromWine/${wineId}`, cellrId),
   postEncounter: (newEncounter: NewEncounter, wine_id: number): Promise<WineEncounter> =>
     requests.post(`${serverURL}/encounters/toWine/${wine_id}`, newEncounter),
   deleteEncounter: (encounter_id: number): Promise<void> => requests.delete(`${serverURL}/encounters/${encounter_id}`),

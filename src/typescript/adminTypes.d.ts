@@ -5,8 +5,14 @@ interface UserData {
   cellr_id: number;
 }
 
+interface NewUserData {
+  username: string;
+  email: string;
+  cellr_id: number;
+}
+
 interface CellrData {
-  id: number | null;
+  id: number
   name: string | null;
 }
 

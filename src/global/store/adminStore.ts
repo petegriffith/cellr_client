@@ -6,7 +6,7 @@ const currentUser: UserData = {
 };
 
 const currentCellr: CellrData = {
-  id: null,
+  id: 0,
   name: '',
 };
 

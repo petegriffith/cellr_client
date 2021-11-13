@@ -33,6 +33,7 @@
 import { defineComponent } from 'vue';
 import { wines } from 'src/global/apicalls';
 import { fetchAndSetAllWines } from 'src/global/store/setters';
+import { getCurrentCellr } from 'src/global/store/getters';
 
 export default defineComponent({
   props: {
@@ -46,7 +47,7 @@ export default defineComponent({
       if (props.currentWine) {
         try {
           await wines.deleteWine(props.currentWine.id);
-          await fetchAndSetAllWines();
+          await fetchAndSetAllWines(getCurrentCellr().id);
         } catch (err) {
           throw err;
         }

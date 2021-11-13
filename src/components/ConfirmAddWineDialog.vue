@@ -47,6 +47,7 @@
 import { defineComponent } from 'vue';
 import { wines } from 'src/global/apicalls';
 import { fetchAndSetAllWines } from 'src/global/store/setters';
+import { getCurrentCellr } from 'src/global/store/getters';
 
 export default defineComponent({
   props: {
@@ -57,7 +58,7 @@ export default defineComponent({
       if (props.newWine)
         try {
           await wines.postWine(props.newWine as NewWine);
-          await fetchAndSetAllWines();
+          await fetchAndSetAllWines(getCurrentCellr().id);
           context.emit('posted');
         } catch (err) {
           alert(err);
