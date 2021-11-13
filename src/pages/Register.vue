@@ -37,7 +37,6 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { registerUser } from 'src/global/utility/authFunctions';
-import { UserData } from 'src/typescript/adminTypes';
 import { users } from 'src/global/apicalls';
 import { fetchAndSetCurrentUser } from 'src/global/store/setters';
 

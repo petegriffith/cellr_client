@@ -3,8 +3,6 @@
 
 
 import axios, { AxiosResponse } from 'axios';
-import { Wine, WineEncounter, NewWine, WineUpdates } from '../typescript/wineTypes';
-import { UserData, CellrData } from '../typescript/adminTypes';
 import { getCurrentCellr } from './store/getters';
 
 const instance = axios.create({

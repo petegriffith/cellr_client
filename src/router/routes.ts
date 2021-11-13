@@ -20,6 +20,7 @@ const routes: RouteRecordRaw[] = [
       { alias:'', path: '/wineList', component: () => import('src/pages/WineList.vue') },
       { path: '/addWine', component: () => import('src/pages/AddWine.vue') },
       { path: '/wineEncounters', component: () => import('src/pages/WineEncounters.vue') },
+      { path: '/addEncounter', component: () => import('src/pages/AddEncounter.vue') },
     ],
     meta: { authRequired: true }
   },

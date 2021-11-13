@@ -47,7 +47,6 @@
 import { defineComponent } from 'vue';
 import { wines } from 'src/global/apicalls';
 import { fetchAndSetAllWines } from 'src/global/store/setters';
-import { NewWine } from 'src/typescript/wineTypes';
 
 export default defineComponent({
   props: {

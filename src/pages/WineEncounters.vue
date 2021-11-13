@@ -1,6 +1,13 @@
 <template>
   <div class="q-pa-md fit column content-center">
-    Here are your encounters for {{ currentWine.name || `Wine ${currentWine.id}` }}<q-table
+    Here are your encounters for {{ currentWine.name || `Wine ${currentWine.id}` }}
+    <q-btn
+                dense
+                color="primary"
+                to="/AddEncounter"
+                label="Add an Encounter"
+              ></q-btn>
+    <q-table
       grid
       title="Encounters"
       :rows="rows"
@@ -23,7 +30,6 @@
 
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
-import { WineEncounter } from 'src/typescript/wineTypes';
 import { encounters } from 'src/global/apicalls';
 import { convertSQLTimestamp } from 'src/global/utility/miscFunctions';
 import { getCurrentWine } from 'src/global/store/getters';

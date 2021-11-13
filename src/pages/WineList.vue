@@ -53,7 +53,6 @@
 <script setup lang="ts">
 import { ref, Ref, onMounted } from 'vue';
 import { convertSQLTimestamp } from 'src/global/utility/miscFunctions';
-import { Wine } from 'src/typescript/wineTypes';
 import { LooseDictionary } from 'quasar';
 import ConfirmDeleteWineDialog from 'src/components/ConfirmDeleteWineDialog.vue';
 import EditWineDialog from 'src/components/EditWineDialog.vue';
