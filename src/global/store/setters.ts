@@ -29,6 +29,7 @@ export const resetCurrentWine = () => {
     vintage: 0,
     color: '',
     created_at: '',
+    cellr_id: 0
   };
 };
 

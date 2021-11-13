@@ -10,6 +10,7 @@ const currentWine: Ref<Wine> = ref({
   vintage: 0,
   color: '',
   created_at: '',
+  cellr_id: 0,
 })
 
 const wineState = {
