@@ -1,5 +1,5 @@
 interface UserData {
-  id?: number
+  id: number
   username: string;
   email: string;
   cellr_id: number;

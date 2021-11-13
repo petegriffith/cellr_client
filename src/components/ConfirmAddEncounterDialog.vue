@@ -53,8 +53,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { wines } from 'src/global/apicalls';
-import { getCurrentWine } from 'src/global/store/getters';
+import { encounters } from 'src/global/apicalls';
+import { getCurrentWine, getCurrentUser } from 'src/global/store/getters';
 
 export default defineComponent({
   props: {
@@ -62,15 +62,22 @@ export default defineComponent({
   },
   setup(props, context) {
     const currentWine = getCurrentWine();
-    const addEncounter = () => {
-      console.log(props.newEncounter);
-      /*  if (props.newEncounter)
+    const currentUser = getCurrentUser();
+
+    const addEncounter = async () => {
+      if (props.newEncounter && currentWine.id) {
+        const newEncounter: NewEncounter = props.newEncounter;
+        newEncounter.user_id = currentUser.id;
+        if (currentWine.name) newEncounter.wine_name = currentWine.name;
         try {
-          await wines.postWine(props.newEncounter as NewEncounter);
+          await encounters.postEncounter(newEncounter, currentWine.id);
           context.emit('posted');
         } catch (err) {
           alert(err);
-        } */
+        }
+      } else {
+        alert('no newEncounter or wineId, who is trying to break my app?')
+      }
     };
 
     return { addEncounter, currentWine };

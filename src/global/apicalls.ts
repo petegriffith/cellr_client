@@ -24,7 +24,7 @@ export const cellrs = {
 }
 
 export const users = {
-  getUsers: (): Promise<UserData[]> => requests.get('./users',),
+  getUsers: (): Promise<UserData[]> => requests.get('./users/all',),
   getUserByEmail: (email: string): Promise<UserData> => requests.get(`./users/${email}`),
   postUser: (user: UserData): Promise<void> => requests.post('./users', user),
 };
@@ -37,8 +37,8 @@ export const wines = {
 };
 
 export const encounters = {
-  getEncountersByWineId: (wineId: number): Promise<WineEncounter[]> => requests.get(`./encounters/${wineId}`),
-  postEncounter: (newEncounter: WineEncounter, wine_id: number): Promise<WineEncounter> =>
-    requests.post(`./encounters/post/${wine_id}`, newEncounter),
+  getEncountersByWineId: (wineId: number): Promise<WineEncounter[]> => requests.get(`./encounters/fromWine/${wineId}`),
+  postEncounter: (newEncounter: NewEncounter, wine_id: number): Promise<WineEncounter> =>
+    requests.post(`./encounters/toWine/${wine_id}`, newEncounter),
   deleteEncounter: (encounter_id: number): Promise<void> => requests.delete(`/encounters/${encounter_id}`)
 };

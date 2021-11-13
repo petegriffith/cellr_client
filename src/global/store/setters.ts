@@ -34,6 +34,7 @@ export const resetCurrentWine = () => {
 
 export const resetCurrentUser = () => {
   adminStore.currentUser = {
+    id: 0,
     username: '',
     email: '',
     cellr_id: 0,

@@ -1,4 +1,5 @@
 const currentUser: UserData = {
+  id: 0,
   username: '',
   email: '',
   cellr_id: 0,
