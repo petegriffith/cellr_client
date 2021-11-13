@@ -76,10 +76,8 @@
   <AddWineDialog v-model="showConfirmDialog" :newWine="newWine" @posted="winePosted = true" />
 </template>
 <script setup lang="ts">
-
 import { ref } from 'vue';
 import AddWineDialog from 'src/components/ConfirmAddWineDialog.vue';
-import { NewWine } from 'src/typescript/wineTypes';
 
 const wine_name = ref('');
 const vintage = ref(2021);
@@ -90,15 +88,15 @@ const winePosted = ref(false);
 const nameToggle = ref("I know the wine's name");
 const vintageToggle = ref("I know the wine's vintage");
 const varietalToggle = ref("I know the wine's varietal");
-const newWine: NewWine = { color: 'unknown'};
+const newWine: NewWine = { color: 'unknown' };
 
-const colorRule = (val: string) => !!val || 'Even if you don\'t know anything else about the wine, surely you know the color?';
-const numberRuleOne = (val: string) => /^(?:19|20)\d{2}$/.test(val) || 'Please enter four digit year beginning with 19 or 20';
+const colorRule = (val: string) => !!val || "Even if you don't know anything else about the wine, surely you know the color?";
+const numberRuleOne = (val: string) => /^(?:19|20)\d{2}$/.test(val) || 'Please enter a four digit year beginning with 19 or 20';
 
 const submitHandler = () => {
-  if (nameToggle.value === 'I know the wine\'s name') newWine.name = wine_name.value;
-  if (vintageToggle.value === 'I know the wine\'s vintage') newWine.vintage = vintage.value;
-  if (varietalToggle.value === 'I know the wine\'s varietal') newWine.varietal = varietal.value;
+  if (nameToggle.value === "I know the wine's name") newWine.name = wine_name.value;
+  if (vintageToggle.value === "I know the wine's vintage") newWine.vintage = vintage.value;
+  if (varietalToggle.value === "I know the wine's varietal") newWine.varietal = varietal.value;
   newWine.color = color.value;
   showConfirmDialog.value = true;
 };

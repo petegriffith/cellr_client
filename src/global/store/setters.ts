@@ -1,7 +1,6 @@
 import { AccessAdminStore } from './adminStore';
 import { AccessWineStore } from './wineStore';
 import { wines, users, cellrs } from '../apicalls';
-import { Wine } from '../../typescript/wineTypes';
 
 const wineStore = AccessWineStore();
 const adminStore = AccessAdminStore();
@@ -35,6 +34,7 @@ export const resetCurrentWine = () => {
 
 export const resetCurrentUser = () => {
   adminStore.currentUser = {
+    id: 0,
     username: '',
     email: '',
     cellr_id: 0,

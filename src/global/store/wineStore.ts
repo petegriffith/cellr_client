@@ -1,6 +1,3 @@
-
-import { Wine, WineStoreContents } from '../../typescript/wineTypes';
-
 // maybe not necessary? 
 const allWinesList: Wine[] = [];
 

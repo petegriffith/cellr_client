@@ -1,6 +1,5 @@
-import { UserData, AdminStoreContents, CellrData } from '../../typescript/adminTypes';
-
 const currentUser: UserData = {
+  id: 0,
   username: '',
   email: '',
   cellr_id: 0,

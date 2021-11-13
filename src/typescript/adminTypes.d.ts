@@ -1,16 +1,16 @@
-export interface UserData {
-  id?: number
+interface UserData {
+  id: number
   username: string;
   email: string;
   cellr_id: number;
 }
 
-export interface CellrData {
+interface CellrData {
   id: number | null;
   name: string | null;
 }
 
-export interface AdminStoreContents {
+interface AdminStoreContents {
   currentUser: UserData;
   currentCellr: CellrData;
   isUserLoggedIn: boolean;
