@@ -14,7 +14,7 @@ const responseBody = (response: AxiosResponse<any>) => response.data;
 
 const requests = {
   get: (url: string, cellr_id = getCurrentCellr().id) =>
-    instance.get(url, { headers: { cellr_id: cellr_id } }).then(responseBody),
+    instance.get(url,  { headers: {'cellr_id': cellr_id}} ).then(responseBody),
   post: (url: string, data: any) => instance.post(url, data).then(responseBody),
   patch: (url: string, data: any) => instance.patch(url, data).then(responseBody),
   delete: (url: string) => instance.delete(url).then(responseBody),
