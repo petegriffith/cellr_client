@@ -1,6 +1,8 @@
 <template>
+  <q-card v-if="currentWine.id < 1">Which wine would you like to encounter?</q-card>
   <q-card v-if="!encounterPosted" class="q-ma-xl q-pa-md">
     <div class="card-title fit row justify-center">
+      <h1>{{currentWine}}</h1>
       <h5>Adding an encounter for {{ currentWine.name }}</h5>
     </div>
     <div class="fit row justify-center">
