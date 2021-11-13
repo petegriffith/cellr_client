@@ -78,6 +78,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import AddWineDialog from 'src/components/ConfirmAddWineDialog.vue';
+import { getCurrentCellr } from 'src/global/store/getters';
 
 const wine_name = ref('');
 const vintage = ref(2021);
@@ -88,7 +89,8 @@ const winePosted = ref(false);
 const nameToggle = ref("I know the wine's name");
 const vintageToggle = ref("I know the wine's vintage");
 const varietalToggle = ref("I know the wine's varietal");
-const newWine: NewWine = { color: 'unknown' };
+const cellr = getCurrentCellr()
+const newWine: NewWine = { color: 'unknown', cellr_id: cellr.id };
 
 const colorRule = (val: string) => !!val || "Even if you don't know anything else about the wine, surely you know the color?";
 const numberRuleOne = (val: string) => /^(?:19|20)\d{2}$/.test(val) || 'Please enter a four digit year beginning with 19 or 20';

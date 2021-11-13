@@ -7,6 +7,7 @@ interface Wine {
   vintage?: number;
   color: string;
   created_at: string;
+  cellr_id: number;
 }
 
 interface NewWine {
@@ -14,6 +15,7 @@ interface NewWine {
   varietal?: string | null;
   vintage?: number | null;
   color: string;
+  cellr_id: number;
 }
 
 interface WineUpdates {
