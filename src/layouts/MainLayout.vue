@@ -41,11 +41,9 @@ const leftDrawerOpen = ref(false);
 const setStores = async () => {
   try {
     const currentUser = getCurrentUser();
-    console.log('currentUser test:', currentUser);
     await fetchAndSetCurrentCellr(currentUser.cellr_id);
     console.log('setting wines');
-    const test = await fetchAndSetAllWines(currentUser.cellr_id);
-    console.log('fetch and set wines test:', test)
+    await fetchAndSetAllWines(currentUser.cellr_id);
   } catch (err) {
     throw err;
   }
