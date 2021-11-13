@@ -2,7 +2,6 @@
 // NEED TO SORT OUT A BETTER SOLUTION FOR THE ABOVE
 
 import axios, { AxiosResponse } from 'axios';
-import { getCurrentCellr } from './store/getters';
 
 const instance = axios.create({
   timeout: 10000,
