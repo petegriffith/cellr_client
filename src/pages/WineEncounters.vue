@@ -50,7 +50,7 @@ const columns = [
 const fetchEncounters = async () => {
   // this is where a loading animation should go
   try {
-    const encountersList: WineEncounter[] = await encounters.getEncountersByWineId(currentWine.id, getCurrentCellr().id);
+    const encountersList: WineEncounter[] = await encounters.getEncountersByWineId(currentWine.value.id, getCurrentCellr().id);
     rows.value = encountersList.map((row) => {
       row.encounter_date = convertSQLTimestamp(row.encounter_date);
       return row;
