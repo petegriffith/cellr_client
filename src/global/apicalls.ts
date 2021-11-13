@@ -13,6 +13,7 @@ const serverURL = 'https://cellr-server.herokuapp.com';
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
 const requests = {
+  // sometimes when the page refreshes, getCurrentCellr() doesn't resolve quickly enough and it returns undefined. Sometimes.
   get: (url: string, cellr_id = getCurrentCellr().id) =>
     instance.get(url,  { headers: {'cellr_id': cellr_id}} ).then(responseBody),
   post: (url: string, data: any) => instance.post(url, data).then(responseBody),
