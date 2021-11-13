@@ -32,7 +32,7 @@
 import { ref, Ref } from 'vue';
 import { encounters } from 'src/global/apicalls';
 import { convertSQLTimestamp } from 'src/global/utility/miscFunctions';
-import { getCurrentWine } from 'src/global/store/getters';
+import { getCurrentCellr, getCurrentWine } from 'src/global/store/getters';
 
 const currentWine = getCurrentWine();
 
@@ -50,7 +50,7 @@ const columns = [
 const fetchEncounters = async () => {
   // this is where a loading animation should go
   try {
-    const encountersList: WineEncounter[] = await encounters.getEncountersByWineId(currentWine.id);
+    const encountersList: WineEncounter[] = await encounters.getEncountersByWineId(currentWine.id, getCurrentCellr().id);
     rows.value = encountersList.map((row) => {
       row.encounter_date = convertSQLTimestamp(row.encounter_date);
       return row;

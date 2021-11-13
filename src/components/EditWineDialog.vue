@@ -61,6 +61,7 @@
 import { defineComponent } from 'vue';
 import { wines } from 'src/global/apicalls';
 import { fetchAndSetAllWines } from 'src/global/store/setters';
+import { getCurrentCellr } from 'src/global/store/getters';
 
 export default defineComponent({
   props: { currentWine: Object },
@@ -69,7 +70,7 @@ export default defineComponent({
       if (props.currentWine && props.currentWine.id) {
         try {
           await wines.patchWine(props.currentWine.id, props.currentWine); 
-          await fetchAndSetAllWines()
+          await fetchAndSetAllWines(getCurrentCellr().id)
         } catch (err) {
           throw err;
         }

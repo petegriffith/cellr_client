@@ -5,16 +5,16 @@ import { wines, users, cellrs } from '../apicalls';
 const wineStore = AccessWineStore();
 const adminStore = AccessAdminStore();
 
-export const fetchAndSetCurrentUser = async (email: string): Promise<void> => {
-  adminStore.currentUser = await users.getUserByEmail(email);
+export const fetchAndSetCurrentUser = async (email: string, cellrId: number): Promise<void> => {
+  adminStore.currentUser = await users.getUserByEmail(email, cellrId);
 };
 
 export const fetchAndSetCurrentCellr = async (cellrId: number): Promise<void> => {
   adminStore.currentCellr = await cellrs.getCellrById(cellrId);
 };
 
-export const fetchAndSetAllWines = async (): Promise<void> => {
-  wineStore.allWinesList = await wines.getWines();
+export const fetchAndSetAllWines = async (cellrId: number): Promise<void> => {
+  wineStore.allWinesList = await wines.getWines(cellrId);
 };
 
 export const setCurrentWine = (selectedWine: Wine): void => {

@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from '@firebase/auth';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
 import routes from './routes';
 import { fetchAndSetCurrentUser } from 'src/global/store/setters';
+import { getCurrentCellr } from 'src/global/store/getters';
 
 /*
  * If not building with SSR mode, you can
@@ -36,7 +37,7 @@ export default route(function (/* { store, ssrContext } */) {
     const user = await new Promise((resolve) => {
       onAuthStateChanged(auth, (user) => {
         if (user && user.email) {
-          void fetchAndSetCurrentUser(user.email);
+          void fetchAndSetCurrentUser(user.email, getCurrentCellr().id as number);
         }
         resolve(user);
       });
