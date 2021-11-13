@@ -110,7 +110,7 @@ import AddEncounterDialog from 'src/components/ConfirmAddEncounterDialog.vue';
 import { getCurrentUser, getCurrentWine } from 'src/global/store/getters';
 
 const currentWine = getCurrentWine();
-const currentUser = getCurrentUser()
+const currentUser = getCurrentUser();
 
 const bottle_price = ref(0);
 const purchase_location = ref('');
