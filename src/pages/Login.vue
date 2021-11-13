@@ -35,6 +35,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { loginUser } from 'src/global/utility/authFunctions';
 import { fetchAndSetCurrentUser } from 'src/global/store/setters';
+import { getCurrentCellr } from 'src/global/store/getters';
 
 const isLoggingIn = ref(false);
 const password = ref('');
@@ -49,7 +50,7 @@ const handleLoginClick = async () => {
   const userCredential = await loginUser(email.value, password.value);
 
   if (userCredential && userCredential.user.email) {
-    await fetchAndSetCurrentUser(userCredential.user.email);
+    await fetchAndSetCurrentUser(userCredential.user.email, getCurrentCellr().id as number);
   }
 
   isLoggingIn.value = false;
