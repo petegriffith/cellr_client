@@ -47,7 +47,9 @@ const router = useRouter();
 const handleLoginClick = async () => {
   isLoggingIn.value = true;
 
+  console.log('logging into firebase...')
   const userCredential = await loginUser(email.value, password.value);
+  console.log('logged into firebase:', userCredential)
 
   if (userCredential && userCredential.user.email) {
     await fetchAndSetCurrentUser(userCredential.user.email, getCurrentCellr().id);
