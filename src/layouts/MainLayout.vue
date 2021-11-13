@@ -44,7 +44,8 @@ const setStores = async () => {
     console.log('setting cellr');
     await fetchAndSetCurrentCellr(currentUser.cellr_id);
     console.log('setting wines');
-    await fetchAndSetAllWines(currentUser.cellr_id);
+    const test = await fetchAndSetAllWines(currentUser.cellr_id);
+    console.log('fetch and set wines test:', test)
   } catch (err) {
     throw err;
   }

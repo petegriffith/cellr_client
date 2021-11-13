@@ -57,8 +57,10 @@ export default defineComponent({
     const addWine = async () => {
       if (props.newWine)
         try {
-          await wines.postWine(props.newWine as NewWine);
-          await fetchAndSetAllWines(getCurrentCellr().id);
+          const test1 = await wines.postWine(props.newWine as NewWine);
+          console.log('post wine test:', test1)
+          const test2 = await fetchAndSetAllWines(getCurrentCellr().id);
+          console.log('fetch and set wines test:', test2)
           context.emit('posted');
         } catch (err) {
           alert(err);
