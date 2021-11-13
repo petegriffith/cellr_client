@@ -1,5 +1,7 @@
-import enUS from './en-US';
+import en from './locales/en.json'
+import jp from './locales/ja.json'
 
 export default {
-  'en-US': enUS
+  'en': en,
+  'jp': jp
 };

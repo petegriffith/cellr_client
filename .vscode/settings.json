@@ -4,7 +4,39 @@
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "vetur.experimental.templateInterpolationService": true,
+<<<<<<< HEAD
   "i18n-ally.localesPaths": [
     "src/i18n"
   ]
+=======
+  "peacock.color": "#58181F",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#80232d",
+    "activityBar.activeBorder": "#000000",
+    "activityBar.background": "#80232d",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#000000",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "editorGroup.border": "#80232d",
+    "panel.border": "#80232d",
+    "sash.hoverBorder": "#80232d",
+    "sideBar.border": "#80232d",
+    "statusBar.background": "#58181f",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#80232d",
+    "statusBarItem.remoteBackground": "#58181f",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#58181f",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#58181f99",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "i18n-ally.localesPaths": [
+    "src/i18n",
+    "src/i18n/locales"
+  ],
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true
+>>>>>>> 71a7d799fb26a950cc8a6ce5014cfa8110307ced
 }

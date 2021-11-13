@@ -1,25 +1,42 @@
-import { AccessAuthStore } from './authStore';
+import { AccessAdminStore } from './adminStore';
 import { AccessWineStore } from './wineStore';
-import { wines, users } from '../apicalls';
-import { Wine } from '../../typescript/wineTypes';
+import { wines, users, cellrs } from '../apicalls';
 
 const wineStore = AccessWineStore();
-const authStore = AccessAuthStore();
+const adminStore = AccessAdminStore();
 
-export const setAllWines = async (): Promise<void> => {
-  const getter = await wines.getWines();
-  for (const element of getter) {
-    wineStore.allWinesList.push(element);
-  }
+export const fetchAndSetCurrentUser = async (email: string): Promise<void> => {
+  adminStore.currentUser = await users.getUserByEmail(email);
 };
 
-export const setCurrentWine = (clickedWine: Wine): void => {
-  wineStore.currentWine = clickedWine;
+export const fetchAndSetCurrentCellr = async (cellrId: number): Promise<void> => {
+  adminStore.currentCellr = await cellrs.getCellrById(cellrId);
 };
 
-export const setAllUsers = async (): Promise<void> => {
-  const getter = await users.getUsers();
-  for (const element of getter) {
-    authStore.userList.push(element);
-  }
+export const fetchAndSetAllWines = async (): Promise<void> => {
+  wineStore.allWinesList = await wines.getWines();
+};
+
+export const setCurrentWine = (selectedWine: Wine): void => {
+  wineStore.currentWine = selectedWine;
+};
+
+export const resetCurrentWine = () => {
+  wineStore.currentWine = {
+    id: 0,
+    name: '',
+    varietal: '',
+    vintage: 0,
+    color: '',
+    created_at: '',
+  };
+};
+
+export const resetCurrentUser = () => {
+  adminStore.currentUser = {
+    id: 0,
+    username: '',
+    email: '',
+    cellr_id: 0,
+  };
 };
