@@ -54,23 +54,19 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { encounters } from 'src/global/apicalls';
-import { getCurrentWine, getCurrentUser } from 'src/global/store/getters';
+import { getCurrentWine } from 'src/global/store/getters';
 
 export default defineComponent({
   props: {
     newEncounter: Object as PropType<NewEncounter>,
   },
   setup(props, context) {
-    const currentWine = getCurrentWine();
-    const currentUser = getCurrentUser();
-
+    const currentWine = getCurrentWine()
     const addEncounter = async () => {
-      if (props.newEncounter && currentWine.id) {
+      if (props.newEncounter) {
         const newEncounter: NewEncounter = props.newEncounter;
-        newEncounter.user_id = currentUser.id;
-        if (currentWine.name) newEncounter.wine_name = currentWine.name;
         try {
-          await encounters.postEncounter(newEncounter, currentWine.id);
+          await encounters.postEncounter(newEncounter, newEncounter.wine_id);
           context.emit('posted');
         } catch (err) {
           alert(err);

@@ -105,9 +105,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import AddEncounterDialog from 'src/components/ConfirmAddEncounterDialog.vue';
-import { getCurrentWine } from 'src/global/store/getters';
+import { getCurrentUser, getCurrentWine } from 'src/global/store/getters';
 
 const currentWine = getCurrentWine();
+const currentUser = getCurrentUser()
 
 const bottle_price = ref(0);
 const purchase_location = ref('');
@@ -121,7 +122,9 @@ const locationToggle = ref('I know where the wine was bought');
 const ratingToggle = ref('I want to rate the wine');
 const dateToggle = ref('I want to set the encounter date');
 const notesToggle = ref('I want to add some notes');
-const newEncounter: NewEncounter = { notes: '' };
+const newEncounter: NewEncounter = { notes: '', wine_id: currentWine.id, user_id: currentUser.id };
+
+if (currentWine.name) newEncounter.wine_name = currentWine.name
 
 const lowRatingRule = (val: number) =>
   val >= 0 || "You can't go lower than zero. Zero is the lowest rating. You are a barbarian.";
@@ -146,7 +149,6 @@ const submitHandler = () => {
   if (ratingToggle.value === 'I want to rate the wine') newEncounter.rating = rating.value;
   if (dateToggle.value === 'I want to set the encounter date') newEncounter.encounter_date = date.value;
   if (notesToggle.value === 'I want to add some notes') newEncounter.notes = notes.value;
-  console.log(newEncounter)
   showConfirmDialog.value = true;
 };
 </script>
