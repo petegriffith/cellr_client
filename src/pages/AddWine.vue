@@ -90,7 +90,9 @@ const nameToggle = ref("I know the wine's name");
 const vintageToggle = ref("I know the wine's vintage");
 const varietalToggle = ref("I know the wine's varietal");
 const cellr = getCurrentCellr()
+console.log(cellr)
 const newWine: NewWine = { color: 'unknown', cellr_id: cellr.id };
+console.log(newWine)
 
 const colorRule = (val: string) => !!val || "Even if you don't know anything else about the wine, surely you know the color?";
 const numberRuleOne = (val: string) => /^(?:19|20)\d{2}$/.test(val) || 'Please enter a four digit year beginning with 19 or 20';
