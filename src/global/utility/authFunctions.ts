@@ -30,6 +30,7 @@ export const loginUser = async (email: string, password: string): Promise<UserCr
 export const logoutUser = async (): Promise<void> => {
   const auth = getAuth();
   await signOut(auth);
+  sessionStorage.clear()
 };
 
 export const checkFirebaseUser = () => {
