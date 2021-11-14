@@ -40,7 +40,7 @@ const leftDrawerOpen = ref(false);
 
 const setStores = async () => {
   try {
-    const currentUser = getCurrentUser();
+    const currentUser = JSON.parse(sessionStorage.getItem('current user') as string) as UserData
     await fetchAndSetCurrentCellr(currentUser.cellr_id);
     console.log('setting wines');
     await fetchAndSetAllWines(currentUser.cellr_id);
