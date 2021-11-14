@@ -8,6 +8,12 @@ const instance = axios.create({
   timeout: 10000,
 });
 
+let serverURL = ''
+
+if (process.env.PROD) {
+  serverURL = 'https://cellr-server.herokuapp.com'
+}
+
 
 const responseBody = (response: AxiosResponse<any>) => response.data;
 
@@ -19,24 +25,25 @@ const requests = {
 };
 
 export const cellrs = {
-  getCellrById: (cellrId: number): Promise<CellrData> => requests.get(`./cellrs/${cellrId}`, cellrId)
+  getCellrById: (cellrId: number): Promise<CellrData> => requests.get(`${serverURL}/cellrs/${cellrId}`, cellrId)
 }
 
 export const users = {
-  getUsers: (cellrId: number): Promise<UserData[]> => requests.get('./users/all', cellrId),
-  getUserByEmail: (email: string, cellrId: number): Promise<UserData> => requests.get(`./users/${email}`, cellrId),
-  postUser: (user: NewUserData): Promise<void> => requests.post('./users', user),
+  getUsers: (cellrId: number): Promise<UserData[]> => requests.get(`${serverURL}/users/all`, cellrId),
+  getUserByEmail: (email: string, cellrId: number): Promise<UserData> => requests.get(`${serverURL}/users/${email}`, cellrId),
+  postUser: (user: NewUserData): Promise<void> => requests.post(`${serverURL}/users`, user),
 };
 
 export const wines = {
-  getWines: (cellrId: number): Promise<Wine[]> => requests.get('./wines/all', cellrId),
-  postWine: (wine: NewWine): Promise<void> => requests.post('./wines', wine),
-  patchWine: (id: number, updates: WineUpdates) => requests.patch(`/wines/${id}`, updates),
-  deleteWine: (id: number): Promise<void> => requests.delete(`/wines/${id}`),
+  getWines: (cellrId: number): Promise<Wine[]> => requests.get(`${serverURL}/wines/all`, cellrId),
+  postWine: (wine: NewWine): Promise<void> => requests.post(`${serverURL}/wines`, wine),
+  patchWine: (id: number, updates: WineUpdates) => requests.patch(`${serverURL}/wines/${id}`, updates),
+  deleteWine: (id: number): Promise<void> => requests.delete(`${serverURL}/wines/${id}`),
 };
 
 export const encounters = {
-  getEncountersByWineId: (wineId: number, cellrId: number): Promise<WineEncounter[]> => requests.get(`./encounters/fromWine/${wineId}`, cellrId),
+  getEncountersByWineId: (wineId: number, cellrId: number): Promise<WineEncounter[]> => requests.get(`${serverURL}/encounters/fromWine/${wineId}`, cellrId),
   postEncounter: (newEncounter: NewEncounter, wine_id: number): Promise<WineEncounter> =>
-    requests.post(`./encounters/toWine/${wine_id}`, newEncounter),
-  deleteEncounter: (encounter_id: number): Promise<void> => requests.delete(`/encounters/${encounter_id}`)
+    requests.post(`${serverURL}/encounters/toWine/${wine_id}`, newEncounter),
+  deleteEncounter: (encounter_id: number): Promise<void> => requests.delete(`${serverURL}/encounters/${encounter_id}`)
+}
