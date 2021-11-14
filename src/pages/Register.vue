@@ -39,6 +39,7 @@ import { useRouter } from 'vue-router';
 import { registerUser } from 'src/global/utility/authFunctions';
 import { users } from 'src/global/apicalls';
 import { fetchAndSetCurrentUser } from 'src/global/store/setters';
+import { getCurrentUser } from 'src/global/store/getters';
 
 const isRegistering = ref(false);
 const isPwd = ref(true);
@@ -63,6 +64,8 @@ const handleRegisterClick = async () => {
     };
     await users.postUser(newUser);
     await fetchAndSetCurrentUser(userCredential.user.email, newUser.cellr_id);
+    const user = getCurrentUser();
+    sessionStorage.setItem('current user', JSON.stringify(user));
   }
   isRegistering.value = false;
 

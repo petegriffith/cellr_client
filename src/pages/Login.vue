@@ -57,7 +57,6 @@ const handleLoginClick = async () => {
 
   const user = getCurrentUser()
   sessionStorage.setItem('current user', JSON.stringify(user))
-  console.log('Session Storage', sessionStorage)
 
   isLoggingIn.value = false;
   // route user
