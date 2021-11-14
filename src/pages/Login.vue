@@ -35,7 +35,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { loginUser } from 'src/global/utility/authFunctions';
 import { fetchAndSetCurrentUser } from 'src/global/store/setters';
-import { getCurrentCellr } from 'src/global/store/getters';
+import { getCurrentCellr, getCurrentUser } from 'src/global/store/getters';
 
 const isLoggingIn = ref(false);
 const password = ref('');
@@ -54,6 +54,10 @@ const handleLoginClick = async () => {
   if (userCredential && userCredential.user.email) {
     await fetchAndSetCurrentUser(userCredential.user.email, getCurrentCellr().id);
   }
+
+  const user = getCurrentUser()
+  sessionStorage.setItem('current user', JSON.stringify(user))
+  console.log('Session Storage', sessionStorage)
 
   isLoggingIn.value = false;
   // route user

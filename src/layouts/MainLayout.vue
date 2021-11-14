@@ -24,23 +24,25 @@
       <router-view />
     </q-page-container>
   </q-layout>
+  <ConfirmLogoutDialog v-model="showConfirmLogout" />
 </template>
 
 <script setup lang="ts">
 import DrawerLink from 'components/DrawerLink.vue';
 import LocaleSwitcher from 'src/components/LocaleSwitcher.vue';
+import ConfirmLogoutDialog from 'src/components/ConfirmLogoutDialog.vue';
 import { ref, onBeforeMount } from 'vue';
-import { fetchAndSetAllWines, fetchAndSetCurrentCellr, resetCurrentUser } from 'src/global/store/setters';
+import { fetchAndSetAllWines, fetchAndSetCurrentCellr } from 'src/global/store/setters';
 import { getCurrentUser } from 'src/global/store/getters';
-import { checkFirebaseUser, logoutUser } from 'src/global/utility/authFunctions';
-/* import { useRouter } from 'vue-router'; */
+import { checkFirebaseUser} from 'src/global/utility/authFunctions';
 
 const isLoading = ref(true);
 const leftDrawerOpen = ref(false);
+const showConfirmLogout = ref(false)
 
 const setStores = async () => {
   try {
-    const currentUser = getCurrentUser();
+    const currentUser = JSON.parse(sessionStorage.getItem('current user') as string) as UserData;
     await fetchAndSetCurrentCellr(currentUser.cellr_id);
     console.log('setting wines');
     await fetchAndSetAllWines(currentUser.cellr_id);
@@ -93,10 +95,7 @@ const checkUserHandler = () => {
   console.log('local:', localUserData);
 };
 
-const logoutUserHandler = async () => {
-  await logoutUser();
-  resetCurrentUser();
-  /* const router = useRouter();
-  await router.replace({ name: 'PreAuth Layout' }); */
+const logoutUserHandler = () => {
+  showConfirmLogout.value = true
 };
 </script>
