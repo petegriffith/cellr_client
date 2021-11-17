@@ -42,7 +42,11 @@ const showConfirmLogout = ref(false)
 
 const setStores = async () => {
   try {
-    console.log(sessionStorage)
+    console.log('sessionStorage', sessionStorage)
+    const siteUrl = window.location.pathname
+    const codeUrl = new URL(siteUrl)
+    const unknownParam = codeUrl.searchParams.get('fakeParam')
+    console.table({siteUrl: siteUrl, codeURL: codeUrl, unknownParam: unknownParam})
     const currentUser = JSON.parse(sessionStorage.getItem('current user') as string) as UserData;
     await fetchAndSetCurrentCellr(currentUser.cellr_id);
     console.log('setting wines');
