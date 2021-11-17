@@ -44,6 +44,7 @@ const setStores = async () => {
   try {
     console.log('sessionStorage', sessionStorage)
     const siteUrl = window.location.pathname
+    console.log(siteUrl)
     const codeUrl = new URL(siteUrl)
     const unknownParam = codeUrl.searchParams.get('fakeParam')
     console.table({siteUrl: siteUrl, codeURL: codeUrl, unknownParam: unknownParam})
